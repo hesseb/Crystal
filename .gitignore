@@ -1,3 +1,10 @@
+# Directories
+bin/
+bin-int/
+.vs/
+
+*.user
+
 # Prerequisites
 *.d
 
