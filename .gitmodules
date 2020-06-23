@@ -2,3 +2,7 @@
 	path = Crystal/vendor/spdlog
 	url = https://github.com/gabime/spdlog
 	ignore = dirty
+[submodule "Crystal/vendor/GLFW"]
+	path = Crystal/vendor/GLFW
+	url = https://github.com/TheCherno/glfw
+	ignore = dirty
