@@ -19,7 +19,7 @@ namespace Crystal
 	private:
 #pragma warning( push )
 #pragma warning( disable : 4251 )
-		static std::shared_ptr<spdlog::logger> s_CoreLogger;
+		static std::shared_ptr<spdlog::logger> s_CoreLogger;    //Exporting STL-stuff generates C4251 warning. Isn't a problem here, but should prob be solved at some point.
 		static std::shared_ptr<spdlog::logger> s_ClientLogger;
 #pragma warning( pop )
 	};
