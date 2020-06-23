@@ -28,7 +28,8 @@ project "Crystal"
 
     includedirs
     {
-        --"%{prj.name}/vendor/"
+        "%{prj.name}/src/",
+        "%{prj.name}/vendor/spdlog/include/"
     }
 
     filter "system:windows"
@@ -76,8 +77,8 @@ project "Sandbox"
 
     includedirs
     {
-        --"Crystal/vendor/"
-        "Crystal/src/"
+        "Crystal/src/",
+        "Crystal/vendor/spdlog/include/"
     }
 
     links
