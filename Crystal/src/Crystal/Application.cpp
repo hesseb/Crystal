@@ -1,5 +1,7 @@
 #include "Application.h"
-#include <stdio.h>
+
+#include "Crystal/Events/ApplicationEvent.h"
+#include "Crystal/Log.h"
 
 namespace Crystal {
 
@@ -15,7 +17,18 @@ namespace Crystal {
 
 	void Application::Run()
 	{
-		printf("Hello, new world!\n");
+		WindowResizeEvent e(1280, 720);
+
+		if (e.IsInCategory(EventCategoryApplication))
+		{
+			CR_TRACE(e);
+		}
+		if (e.IsInCategory(EventCategoryInput))
+		{
+			CR_TRACE(e);
+		}
+
+
 		while (true);
 	}
 }
