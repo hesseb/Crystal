@@ -1,13 +1,13 @@
 #pragma once
 
-#include <memory>
-
 #include "Core.h"
 #include "spdlog/spdlog.h"
 #include "spdlog/fmt/ostr.h"
 
+
 namespace Crystal
 {
+
 	class CR_API Log
 	{
 	public:
@@ -17,10 +17,12 @@ namespace Crystal
 		inline static std::shared_ptr<spdlog::logger>& GetClientLogger() { return s_ClientLogger; }
 
 	private:
+#pragma warning( push )
+#pragma warning( disable : 4251 )
 		static std::shared_ptr<spdlog::logger> s_CoreLogger;
 		static std::shared_ptr<spdlog::logger> s_ClientLogger;
+#pragma warning( pop )
 	};
-
 }
 
 

@@ -2,8 +2,6 @@
 
 #include "Event.h"
 
-#include <sstream>
-
 namespace Crystal
 {
 	class CR_API KeyEvent : public Event
