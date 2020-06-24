@@ -68,14 +68,17 @@ project "Crystal"
 	filter "configurations:Debug"
 		defines "CR_DEBUG"
 		defines "CR_ENABLE_ASSERTS"
+		staticruntime "Off"
 		symbols "On"
 
 	filter "configurations:Release"
 		defines "CR_RELEASE"
+		buildoptions "/MD"
 		optimize "On"
 
 	filter "configurations:Dist"
 		defines "CR_DIST"
+		buildoptions "/MD"
 		optimize "On"
 
 
@@ -116,12 +119,15 @@ project "Sandbox"
 
 	filter "configurations:Debug"
 		defines "CR_DEBUG"
+		staticruntime "Off"
 		symbols "On"
 
 	filter "configurations:Release"
 		defines "CR_RELEASE"
+		buildoptions "/MD"
 		optimize "On"
 
 	filter "configurations:Dist"
 		defines "CR_DIST"
+		buildoptions "/MD"
 		optimize "On"
