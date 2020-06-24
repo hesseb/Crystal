@@ -35,8 +35,9 @@ namespace Crystal
 
 	class CR_API Event
 	{
-		friend class EventDispatcher;
 	public:
+		bool Handled = false;
+
 		virtual EventType GetEventType() const = 0;
 		virtual const char* GetName() const = 0;  //Debug only?
 		virtual int GetCategoryFlags() const = 0; //Debug only?
@@ -46,8 +47,6 @@ namespace Crystal
 		{
 			return GetCategoryFlags() & category;
 		}
-	protected:
-		bool m_Handled = false;
 	};
 
 	class EventDispatcher
@@ -63,7 +62,7 @@ namespace Crystal
 		{
 			if (m_Event.GetEventType() == T::GetStaticType())
 			{
-				m_Event.m_Handled = func(*(T*)&m_Event);
+				m_Event.Handled = func(*(T*)&m_Event);
 				return true;
 			}
 			return false;

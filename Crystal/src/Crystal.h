@@ -4,6 +4,7 @@
 
 #include "Crystal/Application.h"
 #include "Crystal/Log.h"
+#include "Crystal/Layer.h"
 
 
 //========== Entry Point ===========

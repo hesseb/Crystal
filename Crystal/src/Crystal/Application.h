@@ -1,9 +1,10 @@
 #pragma once
 
 #include "Core.h"
-#include "Events/Event.h"
-#include "Events/ApplicationEvent.h"
 #include "Window.h"
+#include "Crystal/Events/Event.h"
+#include "Crystal/Events/ApplicationEvent.h"
+#include "Crystal/LayerStack.h"
 
 namespace Crystal
 {
@@ -17,11 +18,15 @@ namespace Crystal
 
 		void OnEvent(Event& e);
 
+		void PushLayer(Layer* layer);
+		void PushOverlay(Layer* layer);
+
 	private:
 
 		bool OnWindowClose(WindowCloseEvent& e);
 
 		bool m_Running = true;
+		LayerStack m_LayerStack;
 
 #pragma warning( push )
 #pragma warning( disable : 4251 )
