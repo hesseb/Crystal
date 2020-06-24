@@ -2,7 +2,8 @@
 
 #include "Application.h"
 
-#include <GLFW/glfw3.h>
+//#include <GLFW/glfw3.h>
+#include <glad/glad.h>
 
 
 #define BIND_EVENT_FN(x) std::bind(&Application::x, this, std::placeholders::_1)
@@ -34,8 +35,6 @@ namespace Crystal {
 	{
 		EventDispatcher dispatcher(e);
 		dispatcher.Dispatch<WindowCloseEvent>(BIND_EVENT_FN(OnWindowClose));
-
-		//CR_CORE_TRACE("{0}", e);
 
 		for (auto it = m_LayerStack.end(); it != m_LayerStack.begin(); )
 		{

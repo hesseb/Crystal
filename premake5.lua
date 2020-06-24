@@ -15,9 +15,11 @@ workspace "Crystal"
 	-- Include directories relative to root folder (solution directory)
 	IncludeDir = {}
 	IncludeDir["GLFW"] = "Crystal/vendor/GLFW/include"
+	IncludeDir["Glad"] = "Crystal/vendor/Glad/include"
 	IncludeDir["spdlog"] = "Crystal/vendor/spdlog/include/"
 
 	include "Crystal/vendor/GLFW"
+	include "Crystal/vendor/Glad"
 
 project "Crystal"
 	location "Crystal"
@@ -40,12 +42,14 @@ project "Crystal"
 	{
 		"%{prj.name}/src/",
 		"%{IncludeDir.spdlog}",
+		"%{IncludeDir.Glad}",
 		"%{IncludeDir.GLFW}"
 	}
 
 	links
 	{
 		"GLFW",
+		"Glad",
 		"opengl32.lib"
 	}
 
@@ -57,7 +61,8 @@ project "Crystal"
 		defines
 		{
 			"CR_PLATFORM_WINDOWS",
-			"CR_BUILD_DLL"
+			"CR_BUILD_DLL",
+			"GLFW_INCLUDE_NONE"
 		}
 
 		postbuildcommands
