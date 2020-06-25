@@ -14,10 +14,11 @@ workspace "Crystal"
 
 	-- Include directories relative to root folder (solution directory)
 	IncludeDir = {}
-	IncludeDir["GLFW"] = "Crystal/vendor/GLFW/include"
-	IncludeDir["Glad"] = "Crystal/vendor/Glad/include"
-	IncludeDir["ImGui"] = "Crystal/vendor/imgui"
-	IncludeDir["spdlog"] = "Crystal/vendor/spdlog/include/"
+	IncludeDir["GLFW"] 		= "Crystal/vendor/GLFW/include"
+	IncludeDir["Glad"] 		= "Crystal/vendor/Glad/include"
+	IncludeDir["ImGui"] 	= "Crystal/vendor/imgui"
+	IncludeDir["spdlog"] 	= "Crystal/vendor/spdlog/include/"
+	IncludeDir["glm"] 		= "Crystal/vendor/glm"
 
 group "Dependencies"
 	include "Crystal/vendor/GLFW"
@@ -41,7 +42,9 @@ project "Crystal"
 	files
 	{
 		"%{prj.name}/src/**.h",
-		"%{prj.name}/src/**.cpp"
+		"%{prj.name}/src/**.cpp",
+		"%{prj.name}/vendor/glm/glm/**.hpp",
+		"%{prj.name}/vendor/glm/glm/**.inl"
 	}
 
 	includedirs
@@ -50,7 +53,8 @@ project "Crystal"
 		"%{IncludeDir.spdlog}",
 		"%{IncludeDir.Glad}",
 		"%{IncludeDir.GLFW}",
-		"%{IncludeDir.ImGui}"
+		"%{IncludeDir.ImGui}",
+		"%{IncludeDir.glm}"
 	}
 
 	links
@@ -111,7 +115,8 @@ project "Sandbox"
 	includedirs
 	{
 		"Crystal/src/",
-		"Crystal/vendor/spdlog/include/"
+		"Crystal/vendor/spdlog/include/",
+		"%{IncludeDir.glm}"
 	}
 
 	links
