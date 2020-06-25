@@ -158,6 +158,7 @@
     <ClInclude Include="src\Crystal\Events\KeyEvent.h" />
     <ClInclude Include="src\Crystal\Events\MouseEvent.h" />
     <ClInclude Include="src\Crystal\ImGui\ImGuiLayer.h" />
+    <ClInclude Include="src\Crystal\Input.h" />
     <ClInclude Include="src\Crystal\Layer.h" />
     <ClInclude Include="src\Crystal\LayerStack.h" />
     <ClInclude Include="src\Crystal\Log.h" />
@@ -165,6 +166,7 @@
     <ClInclude Include="src\Platform\OpenGL\ImGuiOpenGlRenderer.h" />
     <ClInclude Include="src\Platform\Windows\WindowsWindow.h" />
     <ClInclude Include="src\crpch.h" />
+    <ClInclude Include="src\Platform\Windows\WindowsInput.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Crystal\Application.cpp" />
@@ -177,6 +179,7 @@
     <ClCompile Include="src\crpch.cpp">
       <PrecompiledHeader>Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="src\Platform\Windows\WindowsInput.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="vendor\GLFW\GLFW.vcxproj">
