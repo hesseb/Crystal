@@ -19,14 +19,18 @@ workspace "Crystal"
 	IncludeDir["ImGui"] = "Crystal/vendor/imgui"
 	IncludeDir["spdlog"] = "Crystal/vendor/spdlog/include/"
 
+group "Dependencies"
 	include "Crystal/vendor/GLFW"
 	include "Crystal/vendor/Glad"
 	include "Crystal/vendor/imgui"
+
+group ""
 
 project "Crystal"
 	location "Crystal"
 	kind "SharedLib"
 	language "C++"
+	staticruntime "Off"
 
 	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
 	objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
@@ -59,7 +63,6 @@ project "Crystal"
 
 	filter "system:windows"
 		cppdialect "C++17"
-		staticruntime "On"
 		systemversion "latest"
 
 		defines
@@ -71,23 +74,22 @@ project "Crystal"
 
 		postbuildcommands
 		{
-			("{COPY} %{cfg.buildtarget.relpath} ../bin/" .. outputdir .. "/Sandbox")
+			("{COPY} %{cfg.buildtarget.relpath} \"../bin/" .. outputdir .. "/Sandbox\"")
 		}
 
 	filter "configurations:Debug"
 		defines "CR_DEBUG"
-		defines "CR_ENABLE_ASSERTS"
-		staticruntime "Off"
+		runtime "Debug"
 		symbols "On"
 
 	filter "configurations:Release"
 		defines "CR_RELEASE"
-		buildoptions "/MD"
+		runtime "Release"
 		optimize "On"
 
 	filter "configurations:Dist"
 		defines "CR_DIST"
-		buildoptions "/MD"
+		runtime "Release"
 		optimize "On"
 
 
@@ -95,6 +97,7 @@ project "Sandbox"
 	location "Sandbox"
 	kind "ConsoleApp"
 	language "C++"
+	staticruntime "Off"
 
 	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
 	objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
@@ -118,7 +121,6 @@ project "Sandbox"
 
 	filter "system:windows"
 		cppdialect "C++17"
-		staticruntime "On"
 		systemversion "latest"
 
 		defines
@@ -128,15 +130,15 @@ project "Sandbox"
 
 	filter "configurations:Debug"
 		defines "CR_DEBUG"
-		staticruntime "Off"
+		runtime "Debug"
 		symbols "On"
 
 	filter "configurations:Release"
 		defines "CR_RELEASE"
-		buildoptions "/MD"
+		runtime "Release"
 		optimize "On"
 
 	filter "configurations:Dist"
 		defines "CR_DIST"
-		buildoptions "/MD"
+		runtime "Release"
 		optimize "On"

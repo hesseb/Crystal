@@ -79,7 +79,7 @@
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>crpch.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
-      <PreprocessorDefinitions>CR_PLATFORM_WINDOWS;CR_BUILD_DLL;GLFW_INCLUDE_NONE;CR_DEBUG;CR_ENABLE_ASSERTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>CR_PLATFORM_WINDOWS;CR_BUILD_DLL;GLFW_INCLUDE_NONE;CR_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>src;vendor\spdlog\include;vendor\Glad\include;vendor\GLFW\include;vendor\imgui;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <Optimization>Disabled</Optimization>
@@ -93,7 +93,7 @@
       <ImportLibrary>..\bin\Debug-windows-x86_64\Crystal\Crystal.lib</ImportLibrary>
     </Link>
     <PostBuildEvent>
-      <Command>IF EXIST ..\bin\Debug-windows-x86_64\Crystal\Crystal.dll\ (xcopy /Q /E /Y /I ..\bin\Debug-windows-x86_64\Crystal\Crystal.dll ..\bin\Debug-windows-x86_64\Sandbox &gt; nul) ELSE (xcopy /Q /Y /I ..\bin\Debug-windows-x86_64\Crystal\Crystal.dll ..\bin\Debug-windows-x86_64\Sandbox &gt; nul)</Command>
+      <Command>IF EXIST ..\bin\Debug-windows-x86_64\Crystal\Crystal.dll\ (xcopy /Q /E /Y /I ..\bin\Debug-windows-x86_64\Crystal\Crystal.dll "..\bin\Debug-windows-x86_64\Sandbox" &gt; nul) ELSE (xcopy /Q /Y /I ..\bin\Debug-windows-x86_64\Crystal\Crystal.dll "..\bin\Debug-windows-x86_64\Sandbox" &gt; nul)</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -108,8 +108,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <MinimalRebuild>false</MinimalRebuild>
       <StringPooling>true</StringPooling>
-      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
-      <AdditionalOptions>/MD %(AdditionalOptions)</AdditionalOptions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
@@ -120,7 +119,7 @@
       <ImportLibrary>..\bin\Release-windows-x86_64\Crystal\Crystal.lib</ImportLibrary>
     </Link>
     <PostBuildEvent>
-      <Command>IF EXIST ..\bin\Release-windows-x86_64\Crystal\Crystal.dll\ (xcopy /Q /E /Y /I ..\bin\Release-windows-x86_64\Crystal\Crystal.dll ..\bin\Release-windows-x86_64\Sandbox &gt; nul) ELSE (xcopy /Q /Y /I ..\bin\Release-windows-x86_64\Crystal\Crystal.dll ..\bin\Release-windows-x86_64\Sandbox &gt; nul)</Command>
+      <Command>IF EXIST ..\bin\Release-windows-x86_64\Crystal\Crystal.dll\ (xcopy /Q /E /Y /I ..\bin\Release-windows-x86_64\Crystal\Crystal.dll "..\bin\Release-windows-x86_64\Sandbox" &gt; nul) ELSE (xcopy /Q /Y /I ..\bin\Release-windows-x86_64\Crystal\Crystal.dll "..\bin\Release-windows-x86_64\Sandbox" &gt; nul)</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Dist|x64'">
@@ -135,8 +134,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <MinimalRebuild>false</MinimalRebuild>
       <StringPooling>true</StringPooling>
-      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
-      <AdditionalOptions>/MD %(AdditionalOptions)</AdditionalOptions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
@@ -147,7 +145,7 @@
       <ImportLibrary>..\bin\Dist-windows-x86_64\Crystal\Crystal.lib</ImportLibrary>
     </Link>
     <PostBuildEvent>
-      <Command>IF EXIST ..\bin\Dist-windows-x86_64\Crystal\Crystal.dll\ (xcopy /Q /E /Y /I ..\bin\Dist-windows-x86_64\Crystal\Crystal.dll ..\bin\Dist-windows-x86_64\Sandbox &gt; nul) ELSE (xcopy /Q /Y /I ..\bin\Dist-windows-x86_64\Crystal\Crystal.dll ..\bin\Dist-windows-x86_64\Sandbox &gt; nul)</Command>
+      <Command>IF EXIST ..\bin\Dist-windows-x86_64\Crystal\Crystal.dll\ (xcopy /Q /E /Y /I ..\bin\Dist-windows-x86_64\Crystal\Crystal.dll "..\bin\Dist-windows-x86_64\Sandbox" &gt; nul) ELSE (xcopy /Q /Y /I ..\bin\Dist-windows-x86_64\Crystal\Crystal.dll "..\bin\Dist-windows-x86_64\Sandbox" &gt; nul)</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>

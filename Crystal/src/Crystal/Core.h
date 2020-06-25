@@ -10,6 +10,10 @@
 		#error Crystal only supports Windows!
 #endif
 
+#ifdef CR_DEBUG
+	#define CR_ENABLE_ASSERTS
+#endif
+
 #ifdef CR_ENABLE_ASSERTS
 	#define CR_ASSERT(x, ...) { if(!(x)) { CR_ERROR("Assertion Failed: {0}", __VA_ARGS__); __debugbreak(); }}
 	#define CR_CORE_ASSERT(x, ...) { if(!(x)) { CR_CORE_ERROR("Assertion Failed: {0}", __VA_ARGS__); __debugbreak(); } }
