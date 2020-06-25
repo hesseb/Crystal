@@ -5,6 +5,7 @@
 #include "Crystal/Events/Event.h"
 #include "Crystal/Events/ApplicationEvent.h"
 #include "Crystal/LayerStack.h"
+#include "Crystal/ImGui/ImGuiLayer.h"
 
 namespace Crystal
 {
@@ -32,6 +33,7 @@ namespace Crystal
 		LayerStack m_LayerStack;
 
 		static Application* s_Instance;
+		ImGuiLayer* m_ImGuiLayer;
 
 #pragma warning( push )
 #pragma warning( disable : 4251 )

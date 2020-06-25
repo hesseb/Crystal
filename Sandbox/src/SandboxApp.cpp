@@ -1,5 +1,7 @@
 #include <Crystal.h>
 
+#include "imgui/imgui.h"
+
 class ExampleLayer : public Crystal::Layer
 {
 public:
@@ -10,6 +12,13 @@ public:
 	{
 		if (Crystal::Input::IsKeyPressed(CR_KEY_TAB))
 			CR_TRACE("Tab key is pressed (poll)!");
+	}
+
+	virtual void OnImGuiRender() override
+	{
+		ImGui::Begin("Test");
+		ImGui::Text("Hello World");
+		ImGui::End();
 	}
 
 	void OnEvent(Crystal::Event& event) override
@@ -33,7 +42,6 @@ public:
 	Sandbox()
 	{
 		PushLayer(new ExampleLayer());
-		PushOverlay(new Crystal::ImGuiLayer());
 	}
 
 	~Sandbox()

@@ -93,9 +93,6 @@
     <ClInclude Include="src\Crystal\Window.h">
       <Filter>src\Crystal</Filter>
     </ClInclude>
-    <ClInclude Include="src\Platform\OpenGL\ImGuiOpenGlRenderer.h">
-      <Filter>src\Platform\OpenGL</Filter>
-    </ClInclude>
     <ClInclude Include="src\Platform\Windows\WindowsInput.h">
       <Filter>src\Platform\Windows</Filter>
     </ClInclude>
@@ -1346,9 +1343,6 @@
     <ClCompile Include="src\Crystal\Log.cpp">
       <Filter>src\Crystal</Filter>
     </ClCompile>
-    <ClCompile Include="src\Platform\OpenGL\ImGuiOpenGLRenderer.cpp">
-      <Filter>src\Platform\OpenGL</Filter>
-    </ClCompile>
     <ClCompile Include="src\Platform\Windows\WindowsInput.cpp">
       <Filter>src\Platform\Windows</Filter>
     </ClCompile>
@@ -1358,5 +1352,6 @@
     <ClCompile Include="src\crpch.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="src\Crystal\ImGui\ImGuiBuild.cpp" />
   </ItemGroup>
 </Project>
