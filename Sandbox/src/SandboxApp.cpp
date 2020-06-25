@@ -8,12 +8,21 @@ public:
 
 	void OnUpdate() override
 	{
-		//CR_INFO("ExampleLayer::Update");
+		if (Crystal::Input::IsKeyPressed(CR_KEY_TAB))
+			CR_TRACE("Tab key is pressed (poll)!");
 	}
 
 	void OnEvent(Crystal::Event& event) override
 	{
-		//CR_TRACE("{0}", event);
+		if (event.GetEventType() == Crystal::EventType::KeyPressed)
+		{
+			Crystal::KeyPressedEvent& e = (Crystal::KeyPressedEvent&)event;
+
+			if (e.GetKeyCode() == CR_KEY_TAB)
+				CR_TRACE("Tab key is pressed (event)!)");
+
+			CR_TRACE("{0}", (char)e.GetKeyCode());
+		}
 	}
 };
 
