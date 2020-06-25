@@ -6,3 +6,7 @@
 	path = Crystal/vendor/GLFW
 	url = https://github.com/TheCherno/glfw
 	ignore = dirty
+[submodule "Crystal/vendor/imgui"]
+	path = Crystal/vendor/imgui
+	url = https://github.com/TheCherno/imgui
+	ignore = dirty
