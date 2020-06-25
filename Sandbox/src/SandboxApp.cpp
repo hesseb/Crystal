@@ -13,7 +13,7 @@ public:
 
 	void OnEvent(Crystal::Event& event) override
 	{
-		CR_TRACE("{0}", event);
+		//CR_TRACE("{0}", event);
 	}
 };
 
