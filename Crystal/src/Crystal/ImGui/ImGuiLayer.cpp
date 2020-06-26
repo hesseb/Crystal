@@ -8,8 +8,8 @@
 #include "Crystal/Application.h"
 
 //Temporary until engine-level abstraction for rendering API
-#include "GLFW/glfw3.h"
-#include "glad/glad.h"
+#include <GLFW/glfw3.h>
+#include <glad/glad.h>
 
 
 namespace Crystal
@@ -87,7 +87,7 @@ namespace Crystal
 
 	void ImGuiLayer::OnImGuiRender()
 	{
-		static bool show = true;
+		static bool show = false;
 		ImGui::ShowDemoWindow(&show);
 	}
 

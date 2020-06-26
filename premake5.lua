@@ -39,11 +39,7 @@ project "Crystal"
 	pchheader "crpch.h"
 	pchsource "Crystal/src/crpch.cpp"
 
-	defines
-	{
-		"_CRT_SECURE_NO_WARNINGS"
-	}
-
+	
 	files
 	{
 		"%{prj.name}/src/**.h",
@@ -51,7 +47,12 @@ project "Crystal"
 		"%{prj.name}/vendor/glm/glm/**.hpp",
 		"%{prj.name}/vendor/glm/glm/**.inl"
 	}
-
+	
+	defines
+	{
+		"_CRT_SECURE_NO_WARNINGS"
+	}
+	
 	includedirs
 	{
 		"%{prj.name}/src/",

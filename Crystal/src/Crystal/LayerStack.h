@@ -21,11 +21,7 @@ namespace Crystal
 		std::vector<Layer*>::iterator end() { return m_Layers.end(); }
 
 	private:
-		unsigned int m_LayerInsertIndex = 0;
-
-#pragma warning( push )
-#pragma warning( disable : 4251 )
 		std::vector<Layer*> m_Layers;
-#pragma warning( pop )
+		unsigned int m_LayerInsertIndex = 0;
 	};
 }

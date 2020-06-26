@@ -2,9 +2,9 @@
 
 #include "Core.h"
 #include "Window.h"
+#include "Crystal/LayerStack.h"
 #include "Crystal/Events/Event.h"
 #include "Crystal/Events/ApplicationEvent.h"
-#include "Crystal/LayerStack.h"
 #include "Crystal/ImGui/ImGuiLayer.h"
 
 namespace Crystal
@@ -29,16 +29,12 @@ namespace Crystal
 
 		bool OnWindowClose(WindowCloseEvent& e);
 
+		std::unique_ptr<Window> m_Window;
+		ImGuiLayer* m_ImGuiLayer;
 		bool m_Running = true;
 		LayerStack m_LayerStack;
 
 		static Application* s_Instance;
-		ImGuiLayer* m_ImGuiLayer;
-
-#pragma warning( push )
-#pragma warning( disable : 4251 )
-		std::unique_ptr<Window> m_Window;
-#pragma warning( pop )
 	};
 
 	//Defined by client

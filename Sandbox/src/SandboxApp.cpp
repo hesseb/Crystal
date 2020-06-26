@@ -13,14 +13,14 @@ public:
 		if (Crystal::Input::IsKeyPressed(CR_KEY_TAB))
 			CR_TRACE("Tab key is pressed (poll)!");
 	}
-/*
+
 	virtual void OnImGuiRender() override
 	{
 		ImGui::Begin("Test");
 		ImGui::Text("Hello World");
 		ImGui::End();
 	}
-	*/
+
 	void OnEvent(Crystal::Event& event) override
 	{
 		if (event.GetEventType() == Crystal::EventType::KeyPressed)
