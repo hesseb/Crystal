@@ -41,6 +41,6 @@ bin-int/
 *.lib
 
 # Executables
-*.exe
+#*.exe
 *.out
 *.app
