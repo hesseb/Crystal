@@ -7,6 +7,8 @@
 #include "Crystal/Events/ApplicationEvent.h"
 #include "Crystal/ImGui/ImGuiLayer.h"
 
+#include "Crystal/Renderer/Shader.h"
+
 namespace Crystal
 {
 	class CR_API Application
@@ -35,6 +37,7 @@ namespace Crystal
 		LayerStack m_LayerStack;
 
 		unsigned int m_VertexArray, m_VertexBuffer, m_IndexBuffer;
+		std::unique_ptr<Shader> m_Shader;
 
 		static Application* s_Instance;
 	};
