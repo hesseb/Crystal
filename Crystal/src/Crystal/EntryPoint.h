@@ -7,9 +7,9 @@ extern Crystal::Application* Crystal::CreateApplication();
 int main(int argc, char** argv)
 {
 	Crystal::Log::Init();
+	CR_CORE_TRACE("Welcome to Crystal Engine.");
 
 	auto app = Crystal::CreateApplication();
-	CR_CORE_INFO("Welcome to Crystal Engine.");
 	app->Run();
 	delete app;
 }

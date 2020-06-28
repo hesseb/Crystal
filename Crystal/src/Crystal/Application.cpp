@@ -139,11 +139,6 @@ namespace Crystal
 		m_BlueShader.reset(Shader::Create(blueShaderVertexSrc, blueShaderFragmentSrc));
 	}
 
-	Application::~Application()
-	{
-
-	}
-
 	void Application::PushLayer(Layer* layer)
 	{
 		m_LayerStack.PushLayer(layer);
