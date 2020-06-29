@@ -7,14 +7,9 @@
 #include "Crystal/Events/ApplicationEvent.h"
 #include "Crystal/ImGui/ImGuiLayer.h"
 
-#include "Crystal/Renderer/Shader.h"
-#include "Crystal/Renderer/Buffer.h"
-#include "Crystal/Renderer/VertexArray.h"
-#include "Crystal/Renderer/Camera.h"
-
 namespace Crystal
 {
-	class CR_API Application
+	class Application
 	{
 	public:
 		Application();
@@ -38,14 +33,6 @@ namespace Crystal
 		ImGuiLayer* m_ImGuiLayer;
 		bool m_Running = true;
 		LayerStack m_LayerStack;
-
-		std::shared_ptr<Shader> m_Shader;
-		std::shared_ptr<VertexArray> m_VertexArray;
-
-		std::shared_ptr<Shader> m_BlueShader;
-		std::shared_ptr<VertexArray> m_SquareVertexArray;
-
-		OrthographicCamera m_Camera;
 
 		static Application* s_Instance;
 	};
