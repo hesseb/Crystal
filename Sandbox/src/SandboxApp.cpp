@@ -22,7 +22,7 @@ public:
 			 0.0f,   0.75f, 0.0f, 0.2f, 0.8f, 0.8f, 1.0f
 		};
 
-		std::shared_ptr<Crystal::VertexBuffer> vertexBuffer;
+		Crystal::Ref<Crystal::VertexBuffer> vertexBuffer;
 		vertexBuffer.reset(Crystal::VertexBuffer::Create(vertices, sizeof(vertices)));
 		Crystal::BufferLayout layout = {
 			{ Crystal::ShaderDataType::Float3, "a_Position" },
@@ -31,7 +31,7 @@ public:
 		vertexBuffer->SetLayout(layout);
 
 		uint32_t indices[3] = { 0, 1, 2 };
-		std::shared_ptr<Crystal::IndexBuffer> indexBuffer;
+		Crystal::Ref<Crystal::IndexBuffer> indexBuffer;
 		indexBuffer.reset(Crystal::IndexBuffer::Create(indices, sizeof(indices) / sizeof(uint32_t)));
 
 		m_VertexArray->AddVertexBuffer(vertexBuffer);
@@ -48,7 +48,7 @@ public:
 			-0.5,  0.5, 0.0f
 		};
 
-		std::shared_ptr<Crystal::VertexBuffer> squareVB;
+		Crystal::Ref<Crystal::VertexBuffer> squareVB;
 		squareVB.reset(Crystal::VertexBuffer::Create(squareVertices, sizeof(squareVertices)));
 		squareVB->SetLayout({
 			{ Crystal::ShaderDataType::Float3, "a_Position" }
@@ -56,7 +56,7 @@ public:
 
 
 		uint32_t squareIndices[6] = { 0, 1, 2, 2, 3, 0 };
-		std::shared_ptr<Crystal::IndexBuffer> squareIB;
+		Crystal::Ref<Crystal::IndexBuffer> squareIB;
 		squareIB.reset(Crystal::IndexBuffer::Create(squareIndices, sizeof(squareIndices) / sizeof(uint32_t)));
 
 		m_SquareVertexArray->AddVertexBuffer(squareVB);
@@ -249,11 +249,11 @@ public:
 	}
 
 	private:
-		std::shared_ptr<Crystal::Shader> m_Shader;
-		std::shared_ptr<Crystal::VertexArray> m_VertexArray;
+		Crystal::Ref<Crystal::Shader> m_Shader;
+		Crystal::Ref<Crystal::VertexArray> m_VertexArray;
 
-		std::shared_ptr<Crystal::Shader> m_FlatColorShader;
-		std::shared_ptr<Crystal::VertexArray> m_SquareVertexArray;
+		Crystal::Ref<Crystal::Shader> m_FlatColorShader;
+		Crystal::Ref<Crystal::VertexArray> m_SquareVertexArray;
 
 		Crystal::OrthographicCamera m_Camera;
 		glm::vec3 m_CameraPosition;
