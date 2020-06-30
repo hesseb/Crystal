@@ -1,6 +1,7 @@
 #include <Crystal.h>
 
 #include "imgui/imgui.h"
+#include <glm/gtc/matrix_transform.hpp>
 
 class ExampleLayer : public Crystal::Layer
 {
@@ -37,10 +38,10 @@ public:
 		m_SquareVertexArray.reset(Crystal::VertexArray::Create());
 
 		float squareVertices[3 * 4] = {
-			-0.75, -0.75, 0.0f,
-			 0.75, -0.75, 0.0f,
-			 0.75,  0.75, 0.0f,
-			-0.75,  0.75, 0.0f
+			-0.5, -0.5, 0.0f,
+			 0.5, -0.5, 0.0f,
+			 0.5,  0.5, 0.0f,
+			-0.5,  0.5, 0.0f
 		};
 
 		std::shared_ptr<Crystal::VertexBuffer> squareVB;
@@ -66,15 +67,17 @@ public:
 			layout(location = 1) in vec4 a_Color;
 
 			uniform mat4 u_ViewProjection;
+			uniform mat4 u_ModelMatrix;
 
-			out vec3 v_Position;
+			out vec4 v_Position;
 			out vec4 v_Color;
 
 			void main()
 			{
-				v_Position = a_Position;
 				v_Color = a_Color;
-				gl_Position = u_ViewProjection * vec4(a_Position, 1.0);
+				v_Position = u_ModelMatrix * vec4(a_Position, 1.0);
+				gl_Position = u_ViewProjection * v_Position;
+				//u_ModelMatrix * vec4(a_Position, 1.0);
 			}
 		)";
 
@@ -83,13 +86,13 @@ public:
 
 			layout(location = 0) out vec4 color;
 
-			in vec3 v_Position;
+			in vec4 v_Position;
 			in vec4 v_Color;
 
 			void main()
 			{
-				color = vec4(v_Position * 0.5 + 0.5, 1.0);
-				color = v_Color;
+				color = vec4(v_Position * 0.5 + 0.5);
+				//color = v_Color;
 			}
 		)";
 
@@ -102,13 +105,14 @@ public:
 			layout(location = 0) in vec3 a_Position;
 
 			uniform mat4 u_ViewProjection;
+			uniform mat4 u_ModelMatrix;
 
 			out vec3 v_Position;
 
 			void main()
 			{
 				v_Position = a_Position;
-				gl_Position = u_ViewProjection * vec4(a_Position, 1.0);
+				gl_Position = u_ViewProjection * u_ModelMatrix * vec4(a_Position, 1.0);
 			}
 		)";
 
@@ -150,12 +154,33 @@ public:
 		else if (Crystal::Input::IsKeyPressed(CR_KEY_E))
 			m_CameraRotation -= m_CameraRotationSpeed * ts;
 
+		if (Crystal::Input::IsKeyPressed(CR_KEY_J))
+			m_TrianglePosition.x -= m_TriangleMoveSpeed * ts;
+		else if (Crystal::Input::IsKeyPressed(CR_KEY_L))
+			m_TrianglePosition.x += m_TriangleMoveSpeed * ts;
+
+		if (Crystal::Input::IsKeyPressed(CR_KEY_I))
+			m_TrianglePosition.y += m_TriangleMoveSpeed * ts;
+		else if (Crystal::Input::IsKeyPressed(CR_KEY_K))
+			m_TrianglePosition.y -= m_TriangleMoveSpeed * ts;
+
+		if (Crystal::Input::IsKeyPressed(CR_KEY_U))
+			m_TriangleRotation += m_TriangleRotationSpeed * ts;
+		else if (Crystal::Input::IsKeyPressed(CR_KEY_O))
+			m_TriangleRotation -= m_TriangleRotationSpeed * ts;
+
 		if (Crystal::Input::IsKeyPressed(CR_KEY_R))
 		{
 			m_CameraPosition = { 0.0f, 0.0f, 0.0f };
 			m_CameraRotation = 0.0f;
 			m_CameraZoom = 1.0f;
 			m_Camera.SetZoom(m_CameraZoom);
+		}
+
+		if (Crystal::Input::IsKeyPressed(CR_KEY_P))
+		{
+			m_TrianglePosition = { 0.0f, 0.0f, 0.0f };
+			m_TriangleRotation = 0.0f;
 		}
 
 		Crystal::RenderCommand::SetClearColor({ 0.1f, 0.1f, 0.1f, 1 });
@@ -166,8 +191,22 @@ public:
 
 		Crystal::Renderer::BeginScene(m_Camera);
 
-		Crystal::Renderer::Submit(m_BlueShader, m_SquareVertexArray);
-		Crystal::Renderer::Submit(m_Shader, m_VertexArray);
+		glm::mat4 scale = glm::scale(glm::mat4(1.0f), glm::vec3(0.1f));
+
+		for (int y = 0; y < 20; y++)
+		{
+			for (int x = 0; x < 20; x++)
+			{
+				glm::vec3 pos(x * 0.11f - 1.0f, y * 0.11f - 1.0f, 0.0f);
+				glm::mat4 modelMatrix = glm::translate(glm::mat4(1.0f), pos) * scale;
+
+				Crystal::Renderer::Submit(m_BlueShader, m_SquareVertexArray, modelMatrix);
+			}
+		}
+
+		glm::mat4 modelMatrix = glm::rotate(glm::translate(glm::mat4(1.0f), m_TrianglePosition), m_TriangleRotation, { 0.0f, 0.0f, 1.0f });
+
+		Crystal::Renderer::Submit(m_Shader, m_VertexArray, modelMatrix);
 
 		Crystal::Renderer::EndScene();
 	}
@@ -215,6 +254,13 @@ public:
 
 		float m_CameraZoom = 1.0f;
 		float m_CameraZoomSpeed = 0.1f;
+
+		glm::vec3 m_TrianglePosition = { 0.0f, 0.0f, 0.0f };
+		float m_TriangleMoveSpeed = 2.0f;
+
+		float m_TriangleRotation = 0.0f;
+		float m_TriangleRotationSpeed = 2.0f;
+
 };
 
 
