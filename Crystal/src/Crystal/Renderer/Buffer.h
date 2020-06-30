@@ -40,7 +40,7 @@ namespace Crystal
 		std::string Name;
 		ShaderDataType Type;
 		uint32_t Size;
-		uint64_t Offset;
+		uint32_t Offset;
 		bool Normalized;
 
 		BufferElement() {}
