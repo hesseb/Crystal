@@ -128,25 +128,27 @@ public:
 		m_BlueShader.reset(Crystal::Shader::Create(blueShaderVertexSrc, blueShaderFragmentSrc));
 	}
 
-	void OnUpdate() override
+	void OnUpdate(Crystal::Timestep time) override
 	{
 		//if (Crystal::Input::IsKeyPressed(CR_KEY_TAB))
 		//	CR_TRACE("Tab key is pressed (poll)!");
 
-		if (Crystal::Input::IsKeyPressed(CR_KEY_A)) //Left
-			m_CameraPosition.x -= m_CameraMoveSpeed;
-		else if (Crystal::Input::IsKeyPressed(CR_KEY_D)) //Right
-			m_CameraPosition.x += m_CameraMoveSpeed;
+		float ts = (float)time;
 
-		if (Crystal::Input::IsKeyPressed(CR_KEY_W)) //Up
-			m_CameraPosition.y += m_CameraMoveSpeed;
-		else if (Crystal::Input::IsKeyPressed(CR_KEY_S)) //Down
-			m_CameraPosition.y -= m_CameraMoveSpeed;
+		if (Crystal::Input::IsKeyPressed(CR_KEY_A))
+			m_CameraPosition.x -= m_CameraMoveSpeed * ts;
+		else if (Crystal::Input::IsKeyPressed(CR_KEY_D))
+			m_CameraPosition.x += m_CameraMoveSpeed * ts;
+
+		if (Crystal::Input::IsKeyPressed(CR_KEY_W))
+			m_CameraPosition.y += m_CameraMoveSpeed * ts;
+		else if (Crystal::Input::IsKeyPressed(CR_KEY_S))
+			m_CameraPosition.y -= m_CameraMoveSpeed * ts;
 
 		if (Crystal::Input::IsKeyPressed(CR_KEY_Q))
-			m_CameraRotation += m_CameraRotationSpeed;
+			m_CameraRotation += m_CameraRotationSpeed * ts;
 		else if (Crystal::Input::IsKeyPressed(CR_KEY_E))
-			m_CameraRotation -= m_CameraRotationSpeed;
+			m_CameraRotation -= m_CameraRotationSpeed * ts;
 
 		if (Crystal::Input::IsKeyPressed(CR_KEY_R))
 		{
@@ -155,7 +157,6 @@ public:
 			m_CameraZoom = 1.0f;
 			m_Camera.SetZoom(m_CameraZoom);
 		}
-
 
 		Crystal::RenderCommand::SetClearColor({ 0.1f, 0.1f, 0.1f, 1 });
 		Crystal::RenderCommand::Clear();
@@ -207,10 +208,10 @@ public:
 
 		Crystal::OrthographicCamera m_Camera;
 		glm::vec3 m_CameraPosition;
-		float m_CameraMoveSpeed = 0.05f;
+		float m_CameraMoveSpeed = 5.0f;
 
 		float m_CameraRotation = 0.0f;
-		float m_CameraRotationSpeed = 2.0f;
+		float m_CameraRotationSpeed = 180.0f;
 
 		float m_CameraZoom = 1.0f;
 		float m_CameraZoomSpeed = 0.1f;

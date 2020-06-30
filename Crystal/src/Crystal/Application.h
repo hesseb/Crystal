@@ -7,6 +7,8 @@
 #include "Crystal/Events/ApplicationEvent.h"
 #include "Crystal/ImGui/ImGuiLayer.h"
 
+#include "Crystal/Core/Timestep.h"
+
 namespace Crystal
 {
 	class Application
@@ -35,6 +37,8 @@ namespace Crystal
 		LayerStack m_LayerStack;
 
 		static Application* s_Instance;
+
+		double m_LastFrameTime = 0.0;
 	};
 
 	//Defined by client

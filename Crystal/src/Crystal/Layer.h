@@ -2,11 +2,12 @@
 
 #include "Crystal/Core.h"
 #include "Crystal/Events/Event.h"
+#include "Crystal/Core/Timestep.h"
 
 namespace Crystal
 {
 
-	class CR_API Layer
+	class Layer
 	{
 	public:
 
@@ -16,6 +17,7 @@ namespace Crystal
 		virtual void OnAttach() {}
 		virtual void OnDetach() {}
 		virtual void OnUpdate() {}
+		virtual void OnUpdate(Timestep ts) {}
 		virtual void OnImGuiRender() {}
 		virtual void OnEvent(Event& event) {}
 

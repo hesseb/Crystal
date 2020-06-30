@@ -4,6 +4,7 @@ bin-int/
 .vs/
 
 *.user
+*.pdb
 
 **/imgui.ini
 
