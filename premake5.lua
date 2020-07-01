@@ -18,6 +18,7 @@ workspace "Crystal"
 	IncludeDir["ImGui"] 	= "Crystal/vendor/imgui"
 	IncludeDir["spdlog"] 	= "Crystal/vendor/spdlog/include/"
 	IncludeDir["glm"] 		= "Crystal/vendor/glm"
+	IncludeDir["stb_image"] = "Crystal/vendor/stb_image"
 
 group "Dependencies"
 	include "Crystal/vendor/GLFW"
@@ -45,7 +46,9 @@ project "Crystal"
 		"%{prj.name}/src/**.h",
 		"%{prj.name}/src/**.cpp",
 		"%{prj.name}/vendor/glm/glm/**.hpp",
-		"%{prj.name}/vendor/glm/glm/**.inl"
+		"%{prj.name}/vendor/glm/glm/**.inl",
+		"%{prj.name}/vendor/stb_image/**.h",
+		"%{prj.name}/vendor/stb_image/**.cpp"
 	}
 	
 	defines
@@ -60,7 +63,8 @@ project "Crystal"
 		"%{IncludeDir.Glad}",
 		"%{IncludeDir.GLFW}",
 		"%{IncludeDir.ImGui}",
-		"%{IncludeDir.glm}"
+		"%{IncludeDir.glm}",
+		"%{IncludeDir.stb_image}"
 	}
 
 	links
