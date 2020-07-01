@@ -195,7 +195,7 @@ public:
 
 		m_TexShader.reset(Crystal::Shader::Create(texVSrc, texFSrc));
 		m_Texture = Crystal::Texture2D::Create("assets/textures/Checkerboard.png");
-		//m_Texture = Crystal::Texture2D::Create("assets/textures/head.png");
+		m_PixelTexture = Crystal::Texture2D::Create("assets/textures/head.png");
 
 		std::dynamic_pointer_cast<Crystal::OpenGLShader>(m_TexShader)->Bind();
 		std::dynamic_pointer_cast<Crystal::OpenGLShader>(m_TexShader)->UploadUniformInt("u_Texture", 0);
@@ -278,9 +278,12 @@ public:
 		}
 
 		m_Texture->Bind();
-		scale = glm::scale(glm::mat4(1.0f), glm::vec3(1.5f));
+		scale = glm::scale(glm::mat4(1.0f), glm::vec3(1.0f));
 		glm::mat4 modelMatrix = glm::translate(glm::mat4(1.0f), {-2.0f, 0.0f, 0.0f}) * scale;
 		Crystal::Renderer::Submit(m_TexShader, m_TexVertexArray, modelMatrix);
+		m_PixelTexture->Bind();
+		Crystal::Renderer::Submit(m_TexShader, m_TexVertexArray, modelMatrix);
+
 
 		modelMatrix = glm::rotate(glm::translate(glm::mat4(1.0f), m_TrianglePosition), m_TriangleRotation, { 0.0f, 0.0f, 1.0f });
 
@@ -327,6 +330,7 @@ public:
 		Crystal::Ref<Crystal::Shader> m_TexShader;
 		Crystal::Ref<Crystal::VertexArray> m_TexVertexArray;
 		Crystal::Ref<Crystal::Texture2D> m_Texture;
+		Crystal::Ref<Crystal::Texture2D> m_PixelTexture;
 
 		Crystal::OrthographicCamera m_Camera;
 		glm::vec3 m_CameraPosition;
