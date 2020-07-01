@@ -86,114 +86,11 @@ public:
 		m_TexVertexArray->SetIndexBuffer(squareIB);
 
 		//=========== Shaders ==============
+		m_TriangleShader.reset(Crystal::Shader::Create("assets/shaders/Triangle.glsl"));
+		m_FlatColorShader.reset(Crystal::Shader::Create("assets/shaders/FlatColor.glsl"));
+		m_TexShader.reset(Crystal::Shader::Create("assets/shaders/Texture.glsl"));
 
-		std::string triangleVSrc = R"(
-			#version 330 core
-
-			layout(location = 0) in vec3 a_Position;
-			layout(location = 1) in vec4 a_Color;
-
-			uniform mat4 u_ViewProjection;
-			uniform mat4 u_ModelMatrix;
-
-			out vec4 v_Position;
-			out vec4 v_Color;
-
-			void main()
-			{
-				v_Color = a_Color;
-				v_Position = u_ModelMatrix * vec4(a_Position, 1.0);
-				gl_Position = u_ViewProjection * v_Position;
-				//u_ModelMatrix * vec4(a_Position, 1.0);
-			}
-		)";
-
-		std::string triangleFSrc = R"(
-			#version 330 core
-
-			layout(location = 0) out vec4 color;
-
-			in vec4 v_Position;
-			in vec4 v_Color;
-
-			void main()
-			{
-				color = vec4(v_Position * 0.5 + 0.5);
-				//color = v_Color;
-			}
-		)";
-
-		m_TriangleShader.reset(Crystal::Shader::Create(triangleVSrc, triangleFSrc));
-
-
-		std::string flatColorVSrc = R"(
-			#version 330 core
-
-			layout(location = 0) in vec3 a_Position;
-
-			uniform mat4 u_ViewProjection;
-			uniform mat4 u_ModelMatrix;
-
-			out vec3 v_Position;
-
-			void main()
-			{
-				v_Position = a_Position;
-				gl_Position = u_ViewProjection * u_ModelMatrix * vec4(a_Position, 1.0);
-			}
-		)";
-
-		std::string flatColorFSrc = R"(
-			#version 330 core
-
-			layout(location = 0) out vec4 color;
-
-			in vec3 v_Position;
-
-			uniform vec3 u_Color;
-
-			void main()
-			{
-				color = vec4(u_Color, 1.0);
-			}
-		)";
-
-		m_FlatColorShader.reset(Crystal::Shader::Create(flatColorVSrc, flatColorFSrc));
-
-		std::string texVSrc = R"(
-			#version 330 core
-
-			layout(location = 0) in vec3 a_Position;
-			layout(location = 1) in vec2 a_TexCoord;
-
-			uniform mat4 u_ViewProjection;
-			uniform mat4 u_ModelMatrix;
-
-			out vec2 v_TexCoord;
-
-			void main()
-			{
-				v_TexCoord = a_TexCoord;
-				gl_Position = u_ViewProjection * u_ModelMatrix * vec4(a_Position, 1.0);
-			}
-		)";
-
-		std::string texFSrc = R"(
-			#version 330 core
-
-			layout(location = 0) out vec4 color;
-
-			in vec2 v_TexCoord;
-
-			uniform sampler2D u_Texture;
-
-			void main()
-			{
-				color = texture(u_Texture, v_TexCoord);
-			}
-		)";
-
-		m_TexShader.reset(Crystal::Shader::Create(texVSrc, texFSrc));
+		//=========== Textures =============
 		m_Texture = Crystal::Texture2D::Create("assets/textures/Checkerboard.png");
 		m_PixelTexture = Crystal::Texture2D::Create("assets/textures/head.png");
 
