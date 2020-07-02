@@ -24,8 +24,3 @@
 
 #include "Crystal/Renderer/Camera.h"
 //==================================
-
-
-//========== Entry Point ===========
-#include "Crystal/Core/EntryPoint.h"
-//==================================
