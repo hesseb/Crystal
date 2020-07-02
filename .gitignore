@@ -1,17 +1,18 @@
 # Directories
-/bin/
+**/bin/
 bin-int/
-.vs/
 
-*.user
-*.pdb
+!vendor/bin/premake/
 
 **/imgui.ini
 
 #Visual Studio stuff
+.vs/
+**.sln
+*.user
 **.vcxproj
 **.vcxproj.filters
-**.sln
+**.vcxproj.user
 
 # Prerequisites
 *.d
