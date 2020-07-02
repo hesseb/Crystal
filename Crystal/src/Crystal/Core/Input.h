@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Crystal/Core.h"
+#include "Crystal/Core/Core.h"
 
 namespace Crystal
 {
@@ -30,6 +30,6 @@ namespace Crystal
 		virtual float GetMouseYImpl() = 0;
 
 	private:
-		static Input* s_Instance;
+		static Scope<Input> s_Instance;
 	};
 }

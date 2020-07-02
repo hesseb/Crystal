@@ -14,7 +14,7 @@ public:
 		: Layer("Example"), m_CameraController(16.0f / 9.0f, true)
 	{
 		//======== Triangle VA 1 ==============
-		m_TriangleVertexArray.reset(Crystal::VertexArray::Create());
+		m_TriangleVertexArray = Crystal::VertexArray::Create();
 
 		float triangleVertices[3 * 7] = {
 			-0.75f, -0.75f, 0.0f, 0.8f, 0.8f, 0.2f, 1.0f,
@@ -23,7 +23,7 @@ public:
 		};
 
 		Crystal::Ref<Crystal::VertexBuffer> triangleVertexBuffer;
-		triangleVertexBuffer.reset(Crystal::VertexBuffer::Create(triangleVertices, sizeof(triangleVertices)));
+		triangleVertexBuffer =  Crystal::VertexBuffer::Create(triangleVertices, sizeof(triangleVertices));
 		Crystal::BufferLayout layout = {
 			{ Crystal::ShaderDataType::Float3, "a_Position" },
 			{ Crystal::ShaderDataType::Float4, "a_Color" }
@@ -32,14 +32,14 @@ public:
 
 		uint32_t triangleIndices[3] = { 0, 1, 2 };
 		Crystal::Ref<Crystal::IndexBuffer> triangleIndexBuffer;
-		triangleIndexBuffer.reset(Crystal::IndexBuffer::Create(triangleIndices, sizeof(triangleIndices) / sizeof(uint32_t)));
+		triangleIndexBuffer = Crystal::IndexBuffer::Create(triangleIndices, sizeof(triangleIndices) / sizeof(uint32_t));
 
 		m_TriangleVertexArray->AddVertexBuffer(triangleVertexBuffer);
 		m_TriangleVertexArray->SetIndexBuffer(triangleIndexBuffer);
 
 
 		//======== Square VA 2 ==============
-		m_SquareVertexArray.reset(Crystal::VertexArray::Create());
+		m_SquareVertexArray = Crystal::VertexArray::Create();
 
 		float squareVertices[3 * 4] = {
 			-0.5, -0.5, 0.0f,
@@ -49,7 +49,7 @@ public:
 		};
 
 		Crystal::Ref<Crystal::VertexBuffer> squareVB;
-		squareVB.reset(Crystal::VertexBuffer::Create(squareVertices, sizeof(squareVertices)));
+		squareVB = Crystal::VertexBuffer::Create(squareVertices, sizeof(squareVertices));
 		squareVB->SetLayout({
 			{ Crystal::ShaderDataType::Float3, "a_Position" }
 		});
@@ -57,13 +57,13 @@ public:
 
 		uint32_t squareIndices[6] = { 0, 1, 2, 2, 3, 0 };
 		Crystal::Ref<Crystal::IndexBuffer> squareIB;
-		squareIB.reset(Crystal::IndexBuffer::Create(squareIndices, sizeof(squareIndices) / sizeof(uint32_t)));
+		squareIB = Crystal::IndexBuffer::Create(squareIndices, sizeof(squareIndices) / sizeof(uint32_t));
 
 		m_SquareVertexArray->AddVertexBuffer(squareVB);
 		m_SquareVertexArray->SetIndexBuffer(squareIB);
 
 		//======== Texture VA 3 ==============
-		m_TexVertexArray.reset(Crystal::VertexArray::Create());
+		m_TexVertexArray = Crystal::VertexArray::Create();
 
 		float texVertices[5 * 4] = {
 			-0.5, -0.5, 0.0f, 0.0f, 0.0f,
@@ -73,7 +73,7 @@ public:
 		};
 
 		Crystal::Ref<Crystal::VertexBuffer> texVB;
-		texVB.reset(Crystal::VertexBuffer::Create(texVertices, sizeof(texVertices)));
+		texVB = Crystal::VertexBuffer::Create(texVertices, sizeof(texVertices));
 		texVB->SetLayout({
 			{ Crystal::ShaderDataType::Float3, "a_Position" },
 			{ Crystal::ShaderDataType::Float2, "a_TexCoord" }
@@ -207,7 +207,7 @@ class Sandbox : public Crystal::Application
 public:
 	Sandbox()
 	{
-		PushLayer(new ExampleLayer());
+		PushLayer(std::make_shared<ExampleLayer>());
 	}
 
 	~Sandbox()

@@ -17,21 +17,21 @@ namespace Crystal
 		CR_CORE_ASSERT(!s_Instance, "Application already exists.");
 		s_Instance = this;
 
-		m_Window = std::unique_ptr<Window>(Window::Create());
+		m_Window = Window::Create();
 		m_Window->SetEventCallback(CR_BIND_EVENT_FN(Application::OnEvent));
 
 		Renderer::Init();
 
-		m_ImGuiLayer = new ImGuiLayer();
+		m_ImGuiLayer = std::make_shared<ImGuiLayer>();
 		PushOverlay(m_ImGuiLayer);
 	}
 
-	void Application::PushLayer(Layer* layer)
+	void Application::PushLayer(Ref<Layer> layer)
 	{
 		m_LayerStack.PushLayer(layer);
 	}
 
-	void Application::PushOverlay(Layer* overlay)
+	void Application::PushOverlay(Ref<Layer> overlay)
 	{
 		m_LayerStack.PushOverlay(overlay);
 	}
@@ -60,11 +60,11 @@ namespace Crystal
 
 			if (!m_Minimized)
 			{
-				for (Layer* layer : m_LayerStack) layer->OnUpdate(timestep);
+				for (Ref<Layer> layer : m_LayerStack) layer->OnUpdate(timestep);
 			}
 
 			m_ImGuiLayer->Begin();
-			for (Layer* layer : m_LayerStack)
+			for (Ref<Layer> layer : m_LayerStack)
 				layer->OnImGuiRender();
 			m_ImGuiLayer->End();
 

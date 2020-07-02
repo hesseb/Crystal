@@ -28,6 +28,6 @@ namespace Crystal
 
 		};
 
-		static SceneData* s_SceneData;
+		static Ref<SceneData> s_SceneData;
 	};
 }

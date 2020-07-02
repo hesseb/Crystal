@@ -2,7 +2,7 @@
 
 #include "Core.h"
 #include "Window.h"
-#include "Crystal/LayerStack.h"
+#include "Crystal/Core/LayerStack.h"
 #include "Crystal/Events/Event.h"
 #include "Crystal/Events/ApplicationEvent.h"
 #include "Crystal/ImGui/ImGuiLayer.h"
@@ -21,8 +21,8 @@ namespace Crystal
 
 		void OnEvent(Event& e);
 
-		void PushLayer(Layer* layer);
-		void PushOverlay(Layer* layer);
+		void PushLayer(Ref<Layer> layer);
+		void PushOverlay(Ref<Layer> layer);
 
 		inline Window& GetWindow() { return *m_Window; }
 		inline static Application& Get() { return *s_Instance; }
@@ -32,8 +32,8 @@ namespace Crystal
 		bool OnWindowClose(WindowCloseEvent& e);
 		bool OnWindowResize(WindowResizeEvent& e);
 
-		std::unique_ptr<Window> m_Window;
-		ImGuiLayer* m_ImGuiLayer;
+		Scope<Window> m_Window;
+		Ref<ImGuiLayer> m_ImGuiLayer;
 		bool m_Running = true;
 		bool m_Minimized = false;
 		LayerStack m_LayerStack;

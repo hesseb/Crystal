@@ -2,7 +2,7 @@
 
 #include <crpch.h>
 
-#include "Crystal/Core.h"
+#include "Crystal/Core/Core.h"
 #include "Crystal/Events/Event.h"
 
 namespace Crystal
@@ -39,6 +39,6 @@ namespace Crystal
 
 		virtual void* GetNativeWindow() const = 0;
 
-		static Window* Create(const WindowProps& props = WindowProps());
+		static Scope<Window> Create(const WindowProps& props = WindowProps());
 	};
 }

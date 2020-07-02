@@ -7,18 +7,18 @@ namespace Crystal
 
 	LayerStack::~LayerStack()
 	{
-		for (Layer* layer : m_Layers)
-			delete layer;
+		//for (Ref<Layer> layer : m_Layers)
+		//	delete layer;
 	}
 
-	void LayerStack::PushLayer(Layer* layer)
+	void LayerStack::PushLayer(Ref<Layer> layer)
 	{
 		m_Layers.emplace(m_Layers.begin() + m_LayerInsertIndex, layer);
 		m_LayerInsertIndex++;
 		layer->OnAttach();
 	}
 
-	void LayerStack::PopLayer(Layer* layer)
+	void LayerStack::PopLayer(Ref<Layer> layer)
 	{
 		auto it = std::find(m_Layers.begin(), m_Layers.end(), layer);
 
@@ -30,13 +30,13 @@ namespace Crystal
 		}
 	}
 
-	void LayerStack::PushOverlay(Layer* overlay)
+	void LayerStack::PushOverlay(Ref<Layer> overlay)
 	{
 		m_Layers.emplace_back(overlay);
 		overlay->OnAttach();
 	}
 
-	void LayerStack::PopOverlay(Layer* overlay)
+	void LayerStack::PopOverlay(Ref<Layer> overlay)
 	{
 		auto it = std::find(m_Layers.begin(), m_Layers.end(), overlay);
 

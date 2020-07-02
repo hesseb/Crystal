@@ -2,14 +2,14 @@
 
 //For use by applications only.
 
-#include "Crystal/Application.h"
-#include "Crystal/Layer.h"
-#include "Crystal/Log.h"
+#include "Crystal/Core/Application.h"
+#include "Crystal/Core/Layer.h"
+#include "Crystal/Core/Log.h"
 
-#include "Crystal/Input.h"
-#include "Crystal/KeyCodes.h"
-#include "Crystal/MouseButtonCodes.h"
-#include "Crystal/CameraController.h"
+#include "Crystal/Core/Input.h"
+#include "Crystal/Core/KeyCodes.h"
+#include "Crystal/Core/MouseButtonCodes.h"
+#include "Crystal/Renderer/CameraController.h"
 
 #include "Crystal/ImGui/ImGuiLayer.h"
 
@@ -27,5 +27,5 @@
 
 
 //========== Entry Point ===========
-#include "Crystal/EntryPoint.h"
+#include "Crystal/Core/EntryPoint.h"
 //==================================

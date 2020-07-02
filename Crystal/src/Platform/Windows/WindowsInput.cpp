@@ -1,12 +1,12 @@
 #include <crpch.h>
 #include "WindowsInput.h"
 
-#include "Crystal/Application.h"
+#include "Crystal/Core/Application.h"
 #include <GLFW/glfw3.h>
 
 namespace Crystal
 {
-	Input* Input::s_Instance = new WindowsInput();
+	Scope<Input> Input::s_Instance = std::make_unique<WindowsInput>();
 
 	bool WindowsInput::IsKeyPressedImpl(int keycode)
 	{
