@@ -1,8 +1,8 @@
 #pragma once
 
-#include "RenderCommand.h"
-#include "Camera.h"
-#include "Shader.h"
+#include "Crystal/Renderer/RenderCommand.h"
+#include "Crystal/Renderer/Camera.h"
+#include "Crystal/Renderer/Shader.h"
 
 namespace Crystal
 {
@@ -10,6 +10,7 @@ namespace Crystal
 	{
 	public:
 		static void Init();
+		static void Shutdown();
 		static void OnWindowResize(uint32_t width, uint32_t height);
 
 		static void BeginScene(OrthographicCamera& camera);
@@ -28,6 +29,6 @@ namespace Crystal
 
 		};
 
-		static Ref<SceneData> s_SceneData;
+		static Scope<SceneData> s_SceneData;
 	};
 }

@@ -1,7 +1,7 @@
 #include <crpch.h>
-#include "Texture.h"
+#include "Crystal/Renderer/Texture.h"
 
-#include "Renderer.h"
+#include "Crystal/Renderer/Renderer.h"
 #include "Platform/OpenGL/OpenGLTexture.h"
 
 namespace Crystal
@@ -14,7 +14,7 @@ namespace Crystal
 			CR_CORE_ASSERT(false, "RendererAPI::None is currently not supported.");
 			return nullptr;
 		case RendererAPI::API::OpenGL:
-			return std::make_shared<OpenGLTexture2D>(path);
+			return CreateRef<OpenGLTexture2D>(path);
 		}
 
 		CR_CORE_ASSERT(false, "Unknown RendererAPI.");

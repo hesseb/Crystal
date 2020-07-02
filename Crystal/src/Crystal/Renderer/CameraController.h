@@ -35,7 +35,7 @@ namespace Crystal
 		bool m_ZoomEnabled;
 
 		glm::vec3 m_CameraPosition = { 0.0f, 0.0f, 0.0f };
-		float m_CameraRotation = 0.0f;
+		float m_CameraRotation = 0.0f;   //Degrees, CCW
 		float m_CameraTranslationSpeed = 5.0f;
 		float m_CameraRotationSpeed = 180.0f;
 		float m_CameraZoomSpeed = 0.25f;

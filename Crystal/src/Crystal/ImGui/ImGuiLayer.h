@@ -8,7 +8,7 @@
 
 namespace Crystal
 {
-	class CR_API ImGuiLayer : public Layer
+	class ImGuiLayer : public Layer
 	{
 	public:
 		ImGuiLayer();

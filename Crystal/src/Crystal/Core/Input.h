@@ -4,7 +4,7 @@
 
 namespace Crystal
 {
-	class CR_API Input
+	class Input
 	{
 	protected:
 		Input() = default;

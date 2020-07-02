@@ -1,5 +1,5 @@
 #include <crpch.h>
-#include "LayerStack.h"
+#include "Crystal/Core/LayerStack.h"
 
 namespace Crystal
 {
@@ -7,8 +7,8 @@ namespace Crystal
 
 	LayerStack::~LayerStack()
 	{
-		//for (Ref<Layer> layer : m_Layers)
-		//	delete layer;
+		for (Ref<Layer> layer : m_Layers)
+			layer->OnDetach();
 	}
 
 	void LayerStack::PushLayer(Ref<Layer> layer)

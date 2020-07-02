@@ -1,7 +1,7 @@
 #pragma once
 
-#include "Core.h"
-#include "Window.h"
+#include "Crystal/Core/Core.h"
+#include "Crystal/Core/Window.h"
 #include "Crystal/Core/LayerStack.h"
 #include "Crystal/Events/Event.h"
 #include "Crystal/Events/ApplicationEvent.h"

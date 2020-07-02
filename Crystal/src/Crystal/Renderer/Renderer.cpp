@@ -1,15 +1,20 @@
 #include <crpch.h>
-#include "Renderer.h"
+#include "Crystal/Renderer/Renderer.h"
 
 #include "Platform/OpenGL/OpenGLShader.h"
 
 namespace Crystal
 {
-	Ref<Renderer::SceneData> Renderer::s_SceneData = std::make_shared<Renderer::SceneData>();
+	Scope<Renderer::SceneData> Renderer::s_SceneData = CreateScope<Renderer::SceneData>();
 
 	void Renderer::Init()
 	{
 		RenderCommand::Init();
+	}
+
+	void Renderer::Shutdown()
+	{
+		//Renderer2D::Shutdown();
 	}
 
 	void Renderer::OnWindowResize(uint32_t width, uint32_t height)

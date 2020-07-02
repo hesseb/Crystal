@@ -1,11 +1,11 @@
 #pragma once
 
 #include "Crystal/Core/Core.h"
-#include "Layer.h"
+#include "Crystal/Core/Layer.h"
 
 namespace Crystal
 {
-	class CR_API LayerStack
+	class LayerStack
 	{
 	public:
 

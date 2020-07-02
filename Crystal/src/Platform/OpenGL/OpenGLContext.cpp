@@ -1,6 +1,6 @@
 #include <crpch.h>
 
-#include "OpenGLContext.h"
+#include "Platform/OpenGL/OpenGLContext.h"
 
 #include <GLFW/glfw3.h>
 #include <glad/glad.h>
@@ -24,6 +24,15 @@ namespace Crystal
 		CR_CORE_INFO("  Vendor:\t{0}", glGetString(GL_VENDOR));
 		CR_CORE_INFO("  Renderer:\t{0}", glGetString(GL_RENDERER));
 		CR_CORE_INFO("  Version:\t{0}", glGetString(GL_VERSION));
+
+		#ifdef CR_ENABLE_ASSERTS
+			int versionMajor;
+			int versionMinor;
+			glGetIntegerv(GL_MAJOR_VERSION, &versionMajor);
+			glGetIntegerv(GL_MINOR_VERSION, &versionMinor);
+
+			CR_CORE_ASSERT(versionMajor > 4 || (versionMajor == 4 && versionMinor >= 5), "Crystal requires at least OpenGL 4.5.");
+		#endif
 
 	}
 

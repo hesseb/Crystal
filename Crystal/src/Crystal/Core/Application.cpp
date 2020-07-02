@@ -1,9 +1,9 @@
 #include <crpch.h>
-#include "Application.h"
+#include "Crystal/Core/Application.h"
 
 #include "Crystal/Renderer/Renderer.h"
 
-#include "Input.h"
+#include "Crystal/Core/Input.h"
 
 namespace Crystal
 {
@@ -22,7 +22,7 @@ namespace Crystal
 
 		Renderer::Init();
 
-		m_ImGuiLayer = std::make_shared<ImGuiLayer>();
+		m_ImGuiLayer = CreateRef<ImGuiLayer>();
 		PushOverlay(m_ImGuiLayer);
 	}
 

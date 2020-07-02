@@ -20,7 +20,7 @@ namespace Crystal
 	};
 
 	//Interface for using a desktop system window
-	class CR_API Window
+	class Window
 	{
 	public:
 		using EventCallbackFn = std::function<void(Event&)>;
