@@ -11,7 +11,7 @@ class ExampleLayer : public Crystal::Layer
 {
 public:
 	ExampleLayer()
-		: Layer("Example"), m_Camera(-3.2f, 3.2f, -1.8f, 1.8f), m_CameraPosition({ 0.0f, 0.0f, 0.0f })
+		: Layer("Example"), m_CameraController(16.0f / 9.0f, true)
 	{
 		//======== Triangle VA 1 ==============
 		m_TriangleVertexArray.reset(Crystal::VertexArray::Create());
@@ -86,39 +86,24 @@ public:
 		m_TexVertexArray->SetIndexBuffer(squareIB);
 
 		//=========== Shaders ==============
-		m_TriangleShader.reset(Crystal::Shader::Create("assets/shaders/Triangle.glsl"));
-		m_FlatColorShader.reset(Crystal::Shader::Create("assets/shaders/FlatColor.glsl"));
-		m_TexShader.reset(Crystal::Shader::Create("assets/shaders/Texture.glsl"));
+		m_TriangleShader = Crystal::Shader::Create("assets/shaders/Triangle.glsl");
+		m_FlatColorShader = Crystal::Shader::Create("assets/shaders/FlatColor.glsl");
+		auto texShader = m_ShaderLibrary.Load("assets/shaders/Texture.glsl");
 
 		//=========== Textures =============
 		m_Texture = Crystal::Texture2D::Create("assets/textures/Checkerboard.png");
 		m_PixelTexture = Crystal::Texture2D::Create("assets/textures/head.png");
 
-		std::dynamic_pointer_cast<Crystal::OpenGLShader>(m_TexShader)->Bind();
-		std::dynamic_pointer_cast<Crystal::OpenGLShader>(m_TexShader)->UploadUniformInt("u_Texture", 0);
+		std::dynamic_pointer_cast<Crystal::OpenGLShader>(texShader)->Bind();
+		std::dynamic_pointer_cast<Crystal::OpenGLShader>(texShader)->UploadUniformInt("u_Texture", 0);
 	}
 
 	void OnUpdate(Crystal::Timestep time) override
 	{
-		//if (Crystal::Input::IsKeyPressed(CR_KEY_TAB))
-		//	CR_TRACE("Tab key is pressed (poll)!");
+
+		m_CameraController.OnUpdate(time);
 
 		float ts = (float)time;
-
-		if (Crystal::Input::IsKeyPressed(CR_KEY_A))
-			m_CameraPosition.x -= m_CameraMoveSpeed * ts;
-		else if (Crystal::Input::IsKeyPressed(CR_KEY_D))
-			m_CameraPosition.x += m_CameraMoveSpeed * ts;
-
-		if (Crystal::Input::IsKeyPressed(CR_KEY_W))
-			m_CameraPosition.y += m_CameraMoveSpeed * ts;
-		else if (Crystal::Input::IsKeyPressed(CR_KEY_S))
-			m_CameraPosition.y -= m_CameraMoveSpeed * ts;
-
-		if (Crystal::Input::IsKeyPressed(CR_KEY_Q))
-			m_CameraRotation += m_CameraRotationSpeed * ts;
-		else if (Crystal::Input::IsKeyPressed(CR_KEY_E))
-			m_CameraRotation -= m_CameraRotationSpeed * ts;
 
 		if (Crystal::Input::IsKeyPressed(CR_KEY_J))
 			m_TrianglePosition.x -= m_TriangleMoveSpeed * ts;
@@ -135,14 +120,6 @@ public:
 		else if (Crystal::Input::IsKeyPressed(CR_KEY_O))
 			m_TriangleRotation -= m_TriangleRotationSpeed * ts;
 
-		if (Crystal::Input::IsKeyPressed(CR_KEY_R))
-		{
-			m_CameraPosition = { 0.0f, 0.0f, 0.0f };
-			m_CameraRotation = 0.0f;
-			m_CameraZoom = 1.0f;
-			m_Camera.SetZoom(m_CameraZoom);
-		}
-
 		if (Crystal::Input::IsKeyPressed(CR_KEY_P))
 		{
 			m_TrianglePosition = { 0.0f, 0.0f, 0.0f };
@@ -152,12 +129,9 @@ public:
 		Crystal::RenderCommand::SetClearColor({ 0.1f, 0.1f, 0.1f, 1 });
 		Crystal::RenderCommand::Clear();
 
-		m_Camera.SetPosition(m_CameraPosition);
-		m_Camera.SetRotation(m_CameraRotation);
+		Crystal::Renderer::BeginScene(m_CameraController.GetCamera());
 
-		Crystal::Renderer::BeginScene(m_Camera);
-
-		glm::mat4 scale = glm::scale(glm::mat4(1.0f), glm::vec3(0.1f));
+		glm::mat4 scale = glm::scale(glm::mat4(1.0f), glm::vec3(0.05f));
 
 		std::dynamic_pointer_cast<Crystal::OpenGLShader>(m_FlatColorShader)->Bind();
 		std::dynamic_pointer_cast<Crystal::OpenGLShader>(m_FlatColorShader)->UploadUniformFloat3("u_Color", m_SquareColor);
@@ -167,25 +141,26 @@ public:
 		{
 			for (int x = 0; x < 20; x++)
 			{
-				glm::vec3 pos(x * 0.11f - 1.0f, y * 0.11f - 1.0f, 0.0f);
+				glm::vec3 pos(x * 0.055f -0.5f, y * 0.055f - 0.5f, 0.0f);
 				glm::mat4 modelMatrix = glm::translate(glm::mat4(1.0f), pos) * scale;
 
 				Crystal::Renderer::Submit(m_FlatColorShader, m_SquareVertexArray, modelMatrix);
 			}
 		}
 
+		auto texShader = m_ShaderLibrary.Get("Texture");
+
 		m_Texture->Bind();
-		scale = glm::scale(glm::mat4(1.0f), glm::vec3(1.0f));
-		glm::mat4 modelMatrix = glm::translate(glm::mat4(1.0f), {-2.0f, 0.0f, 0.0f}) * scale;
-		Crystal::Renderer::Submit(m_TexShader, m_TexVertexArray, modelMatrix);
+		scale = glm::scale(glm::mat4(1.0f), glm::vec3(0.5f));
+		glm::mat4 modelMatrix = glm::translate(glm::mat4(1.0f), {-1.0f, 0.0f, 0.0f}) * scale;
+		Crystal::Renderer::Submit(texShader, m_TexVertexArray, modelMatrix);
 		m_PixelTexture->Bind();
-		Crystal::Renderer::Submit(m_TexShader, m_TexVertexArray, modelMatrix);
+		Crystal::Renderer::Submit(texShader, m_TexVertexArray, modelMatrix);
 
 
-		modelMatrix = glm::rotate(glm::translate(glm::mat4(1.0f), m_TrianglePosition), m_TriangleRotation, { 0.0f, 0.0f, 1.0f });
+		modelMatrix = glm::rotate(glm::translate(glm::mat4(1.0f), m_TrianglePosition), m_TriangleRotation, { 0.0f, 0.0f, 1.0f }) * scale;
 
 		Crystal::Renderer::Submit(m_TriangleShader, m_TriangleVertexArray, modelMatrix);
-
 
 		Crystal::Renderer::EndScene();
 	}
@@ -197,47 +172,25 @@ public:
 		ImGui::End();
 	}
 
-	void OnEvent(Crystal::Event& event) override
+	void OnEvent(Crystal::Event& e) override
 	{
-		if (event.GetEventType() == Crystal::EventType::MouseScrolled)
-		{
-			Crystal::MouseScrolledEvent& e = (Crystal::MouseScrolledEvent&)event;
-
-			if (e.GetYOffset() == 1)
-				m_CameraZoom -= m_CameraZoomSpeed;
-			if (e.GetYOffset() == -1)
-				m_CameraZoom += m_CameraZoomSpeed;
-
-			if (m_CameraZoom < 0.2f)
-				m_CameraZoom = 0.2f;
-			else if (m_CameraZoom > 1.8f)
-				m_CameraZoom = 1.8f;
-
-			m_Camera.SetZoom(m_CameraZoom);
-		}
+		m_CameraController.OnEvent(e);
 	}
 
 	private:
+		Crystal::OrthographicCameraController m_CameraController;
+		Crystal::ShaderLibrary m_ShaderLibrary;
+
 		Crystal::Ref<Crystal::Shader> m_TriangleShader;
 		Crystal::Ref<Crystal::VertexArray> m_TriangleVertexArray;
 
 		Crystal::Ref<Crystal::Shader> m_FlatColorShader;
 		Crystal::Ref<Crystal::VertexArray> m_SquareVertexArray;
 
-		Crystal::Ref<Crystal::Shader> m_TexShader;
+		//Crystal::Ref<Crystal::Shader> m_TexShader;
 		Crystal::Ref<Crystal::VertexArray> m_TexVertexArray;
 		Crystal::Ref<Crystal::Texture2D> m_Texture;
 		Crystal::Ref<Crystal::Texture2D> m_PixelTexture;
-
-		Crystal::OrthographicCamera m_Camera;
-		glm::vec3 m_CameraPosition;
-		float m_CameraMoveSpeed = 5.0f;
-
-		float m_CameraRotation = 0.0f;
-		float m_CameraRotationSpeed = 180.0f;
-
-		float m_CameraZoom = 1.0f;
-		float m_CameraZoomSpeed = 0.1f;
 
 		glm::vec3 m_TrianglePosition = { 0.0f, 0.0f, 0.0f };
 		float m_TriangleMoveSpeed = 2.0f;
