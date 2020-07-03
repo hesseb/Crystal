@@ -15,6 +15,7 @@
 
 //=======Renderer===================
 #include "Crystal/Renderer/Renderer.h"
+#include "Crystal/Renderer/Renderer2D.h"
 #include "Crystal/Renderer/RenderCommand.h"
 
 #include "Crystal/Renderer/Buffer.h"
