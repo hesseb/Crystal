@@ -16,6 +16,8 @@ namespace Crystal
 
 	void OrthographicCameraController::OnUpdate(Timestep time)
 	{
+		CR_PROFILE_FUNCTION();
+
 		float ts = (float)time;
 
 		if (Input::IsKeyPressed(CR_KEY_A))
@@ -77,6 +79,8 @@ namespace Crystal
 
 	void OrthographicCameraController::OnEvent(Event& e)
 	{
+		CR_PROFILE_FUNCTION();
+
 		EventDispatcher dispatcher(e);
 		dispatcher.Dispatch<MouseScrolledEvent>(CR_BIND_EVENT_FN(OrthographicCameraController::OnMouseScrolled));
 		dispatcher.Dispatch<WindowResizeEvent>(CR_BIND_EVENT_FN(OrthographicCameraController::OnWindowResized));
@@ -84,6 +88,8 @@ namespace Crystal
 
 	bool OrthographicCameraController::OnMouseScrolled(MouseScrolledEvent& e)
 	{
+		CR_PROFILE_FUNCTION();
+
 		if (m_ZoomEnabled)
 		{
 			m_ZoomLevel -= e.GetYOffset() * m_CameraZoomSpeed;
@@ -97,6 +103,8 @@ namespace Crystal
 
 	bool OrthographicCameraController::OnWindowResized(WindowResizeEvent& e)
 	{
+		CR_PROFILE_FUNCTION();
+
 		m_AspectRatio = (float)e.GetWidth() / (float)e.GetHeight();
 		m_Camera.SetProjection(m_AspectRatio, m_ZoomLevel);
 		return false;

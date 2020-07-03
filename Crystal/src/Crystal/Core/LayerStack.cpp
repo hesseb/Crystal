@@ -15,7 +15,6 @@ namespace Crystal
 	{
 		m_Layers.emplace(m_Layers.begin() + m_LayerInsertIndex, layer);
 		m_LayerInsertIndex++;
-		layer->OnAttach();
 	}
 
 	void LayerStack::PopLayer(Ref<Layer> layer)
@@ -33,7 +32,6 @@ namespace Crystal
 	void LayerStack::PushOverlay(Ref<Layer> overlay)
 	{
 		m_Layers.emplace_back(overlay);
-		overlay->OnAttach();
 	}
 
 	void LayerStack::PopOverlay(Ref<Layer> overlay)

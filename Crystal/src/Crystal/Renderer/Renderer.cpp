@@ -10,6 +10,8 @@ namespace Crystal
 
 	void Renderer::Init()
 	{
+		CR_PROFILE_FUNCTION();
+
 		RenderCommand::Init();
 		Renderer2D::Init();
 	}

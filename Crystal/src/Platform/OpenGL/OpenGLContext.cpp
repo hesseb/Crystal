@@ -16,6 +16,8 @@ namespace Crystal
 
 	void OpenGLContext::Init()
 	{
+		CR_PROFILE_FUNCTION();
+
 		glfwMakeContextCurrent(m_WindowHandle);
 		int status = gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
 		CR_CORE_ASSERT(status, "Failed to initialize Glad.");
@@ -38,6 +40,8 @@ namespace Crystal
 
 	void OpenGLContext::SwapBuffers()
 	{
+		CR_PROFILE_FUNCTION();
+
 		glfwSwapBuffers(m_WindowHandle);
 	}
 }

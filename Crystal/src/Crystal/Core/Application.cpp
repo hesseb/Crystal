@@ -14,6 +14,8 @@ namespace Crystal
 
 	Application::Application()
 	{
+		CR_PROFILE_FUNCTION();
+
 		CR_CORE_ASSERT(!s_Instance, "Application already exists.");
 		s_Instance = this;
 
@@ -26,18 +28,33 @@ namespace Crystal
 		PushOverlay(m_ImGuiLayer);
 	}
 
+	Application::~Application()
+	{
+		CR_PROFILE_FUNCTION();
+
+		Renderer::Shutdown();
+	}
+
 	void Application::PushLayer(Ref<Layer> layer)
 	{
+		CR_PROFILE_FUNCTION();
+
 		m_LayerStack.PushLayer(layer);
+		layer->OnAttach();
 	}
 
 	void Application::PushOverlay(Ref<Layer> overlay)
 	{
+		CR_PROFILE_FUNCTION();
+
 		m_LayerStack.PushOverlay(overlay);
+		overlay->OnAttach();
 	}
 
 	void Application::OnEvent(Event& e)
 	{
+		CR_PROFILE_FUNCTION();
+
 		EventDispatcher dispatcher(e);
 		dispatcher.Dispatch<WindowCloseEvent>(CR_BIND_EVENT_FN(Application::OnWindowClose));
 		dispatcher.Dispatch<WindowResizeEvent>(CR_BIND_EVENT_FN(Application::OnWindowResize));
@@ -52,20 +69,29 @@ namespace Crystal
 
 	void Application::Run()
 	{
+		CR_PROFILE_FUNCTION();
+
 		while (m_Running)
 		{
+			CR_PROFILE_SCOPE("RunLoop");
+
 			double time = Timestep::GetTime();
 			Timestep timestep = time - m_LastFrameTime;
 			m_LastFrameTime = time;
 
 			if (!m_Minimized)
 			{
+				CR_PROFILE_SCOPE("LayerStack OnUpdate");
+
 				for (Ref<Layer> layer : m_LayerStack) layer->OnUpdate(timestep);
 			}
 
 			m_ImGuiLayer->Begin();
-			for (Ref<Layer> layer : m_LayerStack)
-				layer->OnImGuiRender();
+			{
+				CR_PROFILE_SCOPE("LayerStack OnImGuiRender");
+
+				for (Ref<Layer> layer : m_LayerStack) layer->OnImGuiRender();
+			}
 			m_ImGuiLayer->End();
 
 			m_Window->OnUpdate();
@@ -81,6 +107,7 @@ namespace Crystal
 
 	bool Application::OnWindowResize(WindowResizeEvent& e)
 	{
+		CR_PROFILE_FUNCTION();
 		if (e.GetWidth() == 0 || e.GetHeight() == 0)
 		{
 			m_Minimized = true;
