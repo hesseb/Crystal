@@ -21,6 +21,8 @@ private:
 	//Temp
 	Crystal::Ref<Crystal::VertexArray> m_SquareVA;
 	Crystal::Ref<Crystal::Shader> m_FlatColorShader;
+	Crystal::Ref<Crystal::Texture2D> m_CheckerboardTexture;
 
-	glm::vec4 m_SquareColor = { 0.8f, 0.2f, 0.3f, 1.0f };
+	glm::vec4 m_SquareColorA = { 0.8f, 0.2f, 0.3f, 1.0f };
+	glm::vec4 m_SquareColorB = { 0.3f, 0.2f, 0.8f, 1.0f };
 };
