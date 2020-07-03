@@ -15,6 +15,7 @@
 #include <unordered_set>
 
 #include "Crystal/Core/Log.h"
+#include "Crystal/Debug/Instrumentor.h"
 
 #ifdef CR_PLATFORM_WINDOWS
 	#include <Windows.h>

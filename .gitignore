@@ -4,6 +4,8 @@ bin-int/
 
 !vendor/bin/premake/
 
+**/*.json
+
 **/imgui.ini
 
 #Visual Studio stuff

@@ -2,6 +2,8 @@
 
 #include <Crystal.h>
 
+#define PROFILE_SCOPE(name) Crystal::Timer timer##__LINE__(name, [&](Crystal::ProfileResult profileResult) { m_ProfileResults.push_back(profileResult); })
+
 class Sandbox2D : public Crystal::Layer
 {
 public:

@@ -5,6 +5,7 @@
 #include "Crystal/Core/Application.h"
 #include "Crystal/Core/Layer.h"
 #include "Crystal/Core/Log.h"
+#include "Crystal/Debug/Instrumentor.h"
 
 #include "Crystal/Core/Input.h"
 #include "Crystal/Core/KeyCodes.h"
