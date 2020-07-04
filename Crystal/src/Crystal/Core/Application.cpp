@@ -1,8 +1,9 @@
 #include <crpch.h>
 #include "Crystal/Core/Application.h"
 
+#include "Crystal/Core/Log.h"
+#include "Crystal/Core/Log.h"
 #include "Crystal/Renderer/Renderer.h"
-
 #include "Crystal/Core/Input.h"
 
 namespace Crystal

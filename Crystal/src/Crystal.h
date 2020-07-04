@@ -1,6 +1,7 @@
 #pragma once
 
 //For use by applications only.
+#include "Crystal/Core/Core.h"
 
 #include "Crystal/Core/Application.h"
 #include "Crystal/Core/Layer.h"

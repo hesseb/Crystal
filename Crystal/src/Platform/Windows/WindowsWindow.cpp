@@ -48,7 +48,6 @@ namespace Crystal
 		if (s_GLFWWindowCount == 0)
 		{
 			CR_PROFILE_SCOPE("glfwInit");
-			CR_CORE_INFO("Initializing GLFW");
 			int success = glfwInit();
 			CR_CORE_ASSERT(success, "Could not intialize GLFW.");
 

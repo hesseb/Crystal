@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Crystal/Core/Core.h"
+
 #include <spdlog/spdlog.h>
 #include <spdlog/fmt/ostr.h>
 

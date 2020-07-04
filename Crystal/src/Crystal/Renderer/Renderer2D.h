@@ -1,7 +1,7 @@
 #pragma once
 
-#include "Camera.h"
-#include "Texture.h"
+#include "Crystal/Renderer/Camera.h"
+#include "Crystal/Renderer/Texture.h"
 
 namespace Crystal
 {

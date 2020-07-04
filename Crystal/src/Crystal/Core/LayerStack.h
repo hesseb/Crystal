@@ -3,13 +3,15 @@
 #include "Crystal/Core/Core.h"
 #include "Crystal/Core/Layer.h"
 
+#include <vector>
+
 namespace Crystal
 {
 	class LayerStack
 	{
 	public:
 
-		LayerStack();
+		LayerStack() = default;
 		~LayerStack();
 
 		void PushLayer(Ref<Layer> layer);

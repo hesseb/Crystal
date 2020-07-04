@@ -3,8 +3,6 @@
 
 namespace Crystal
 {
-	LayerStack::LayerStack() {}
-
 	LayerStack::~LayerStack()
 	{
 		for (Ref<Layer> layer : m_Layers)

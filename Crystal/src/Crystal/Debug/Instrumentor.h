@@ -122,7 +122,7 @@ namespace Crystal {
 	};
 }
 
-#define CR_PROFILE 1
+#define CR_PROFILE 0
 #if CR_PROFILE
 #define CR_PROFILE_BEGIN_SESSION(name, filepath) ::Crystal::Instrumentor::Get().BeginSession(name, filepath)
 #define CR_PROFILE_END_SESSION() ::Crystal::Instrumentor::Get().EndSession()

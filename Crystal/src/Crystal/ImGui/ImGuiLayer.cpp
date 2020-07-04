@@ -2,15 +2,11 @@
 #include "Crystal/ImGui/ImGuiLayer.h"
 
 #include <imgui.h>
+#include <GLFW/glfw3.h>
 #include <examples/imgui_impl_glfw.h>
 #include <examples/imgui_impl_opengl3.h>
 
 #include "Crystal/Core/Application.h"
-
-//Temporary until engine-level abstraction for rendering API
-#include <GLFW/glfw3.h>
-#include <glad/glad.h>
-
 
 namespace Crystal
 {
