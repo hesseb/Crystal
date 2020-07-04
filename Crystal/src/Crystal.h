@@ -10,7 +10,7 @@
 
 #include "Crystal/Core/Input.h"
 #include "Crystal/Core/KeyCodes.h"
-#include "Crystal/Core/MouseButtonCodes.h"
+#include "Crystal/Core/MouseCodes.h"
 #include "Crystal/Renderer/CameraController.h"
 
 #include "Crystal/ImGui/ImGuiLayer.h"
