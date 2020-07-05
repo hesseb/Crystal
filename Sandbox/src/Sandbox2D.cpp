@@ -38,9 +38,14 @@ void Sandbox2D::OnUpdate(Crystal::Timestep ts)
 
 	{
 		int side = 50;
+		static float rotation = 0.0f;
+		rotation += (float)ts * 50.0f;
+
 		CR_PROFILE_SCOPE("Renderer Draw");
+
 		Crystal::Renderer2D::BeginScene(m_CameraController.GetCamera());
 
+		Crystal::Renderer2D::DrawQuad({ 0.0f, 0.0f, -0.6f }, { 10.0f, 10.0f }, m_CheckerboardTexture, 10.0f);
 		for (int j = 0; j < side; j++)
 		{
 			for (int i = 0; i < side; i++)
@@ -50,11 +55,10 @@ void Sandbox2D::OnUpdate(Crystal::Timestep ts)
 			}
 		}
 		Crystal::Renderer2D::DrawQuad({ 0.0f, 2.1f }, { 1.0f, 1.0f }, m_SquareColorB);
-		Crystal::Renderer2D::DrawQuad({ 2.1f, 0.0f }, { 1.0f, 1.0f }, m_SquareColorA);
 		Crystal::Renderer2D::DrawQuad({ -5.0f, -0.5f, -0.1f }, { 1.0f, 1.0f }, m_SpriteTexture, 1.0f);
+		Crystal::Renderer2D::DrawRotatedQuad({ -0.5f, -0.5f, -0.1f }, { 1.0f, 1.0f }, -45.0f, m_SpriteTexture, 1.0f);
+		Crystal::Renderer2D::DrawRotatedQuad({ 2.1f, 0.0f }, { 1.0f, 1.0f }, rotation, m_SquareColorA);
 		Crystal::Renderer2D::DrawQuad({ 0.0f, 0.0f }, { 1.0f, 1.0f }, m_SquareColorA);
-		Crystal::Renderer2D::DrawQuad({ -5.0f, -5.0f, -0.3f }, { 10.0f, 10.0f }, m_CheckerboardTexture, 10.0f);
-		Crystal::Renderer2D::DrawQuad({ -0.5f, -0.5f, -0.1f }, { 1.0f, 1.0f }, m_SpriteTexture, 1.0f);
 		Crystal::Renderer2D::EndScene();
 	}
 }
