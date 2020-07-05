@@ -46,7 +46,7 @@ namespace Crystal
 		{
 			CR_PROFILE_SCOPE("glfwInit");
 			int success = glfwInit();
-			CR_CORE_ASSERT(success, "Could not intialize GLFW.");
+			CR_CORE_ASSERT(success, "Could not initialize GLFW.");
 
 			glfwSetErrorCallback(GLFWErrorCallback);
 		}
