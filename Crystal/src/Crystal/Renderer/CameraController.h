@@ -16,11 +16,11 @@ namespace Crystal
 		void OnUpdate(Timestep ts);
 		void OnEvent(Event& e);
 
-		inline OrthographicCamera& GetCamera() { return m_Camera; }
-		const inline OrthographicCamera& GetCamera() const { return m_Camera; }
+		OrthographicCamera& GetCamera() { return m_Camera; }
+		const OrthographicCamera& GetCamera() const { return m_Camera; }
 
-		inline float GetZoomLevel() const { return m_ZoomLevel; }
-		inline void SetZoomLevel(float level) { m_ZoomLevel = level; }
+		float GetZoomLevel() const { return m_ZoomLevel; }
+		void SetZoomLevel(float level) { m_ZoomLevel = level; }
 
 	private:
 		bool OnMouseScrolled(MouseScrolledEvent& e);

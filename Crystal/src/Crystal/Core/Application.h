@@ -24,8 +24,8 @@ namespace Crystal
 		void PushLayer(Ref<Layer> layer);
 		void PushOverlay(Ref<Layer> layer);
 
-		inline Window& GetWindow() { return *m_Window; }
-		inline static Application& Get() { return *s_Instance; }
+		Window& GetWindow() { return *m_Window; }
+		static Application& Get() { return *s_Instance; }
 
 	private:
 

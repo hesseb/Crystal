@@ -43,7 +43,7 @@ namespace Crystal
 		virtual int GetCategoryFlags() const = 0; //Debug only?
 		virtual std::string ToString() const { return GetName(); }
 
-		inline bool IsInCategory(EventCategory category)
+		bool IsInCategory(EventCategory category)
 		{
 			return GetCategoryFlags() & category;
 		}

@@ -27,7 +27,7 @@ namespace Crystal
 		virtual void SetFloat4(const std::string& name, const glm::vec4& value) override;
 		virtual void SetMat4(const std::string& name, const glm::mat4& value) override;
 
-		inline virtual const std::string& GetName() const override { return m_Name; }
+		virtual const std::string& GetName() const override { return m_Name; }
 
 		void UploadUniformInt(const std::string& name, const int value);
 		void UploadUniformIntArray(const std::string& name, const int* values, uint32_t count);
