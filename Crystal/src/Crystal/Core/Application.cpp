@@ -52,6 +52,11 @@ namespace Crystal
 		overlay->OnAttach();
 	}
 
+	void Application::Close()
+	{
+		m_Running = false;
+	}
+
 	void Application::OnEvent(Event& e)
 	{
 		CR_PROFILE_FUNCTION();
