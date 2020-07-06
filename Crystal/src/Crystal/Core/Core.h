@@ -9,12 +9,22 @@
 #endif
 
 #ifdef CR_DEBUG
+	#ifdef CR_PLATFORM_WINDOWS
+		#define CR_DEBUGBREAK() __debugbreak()
+	#elif defined(CR_PLATFORM_LINUX)
+		#include <signal.h>
+		#define CR_DEBUGBREAK() raise(SIGTRAP)
+	#else
+		#error "Platform doesn't support debugbreak yet!"
+	#endif
 	#define CR_ENABLE_ASSERTS
+#else
+	#define CR_DEBUGBREAK()
 #endif
 
 #ifdef CR_ENABLE_ASSERTS
-	#define CR_ASSERT(x, ...) { if(!(x)) { CR_ERROR("Assertion Failed: {0}", __VA_ARGS__); __debugbreak(); }}
-	#define CR_CORE_ASSERT(x, ...) { if(!(x)) { CR_CORE_ERROR("Assertion Failed: {0}", __VA_ARGS__); __debugbreak(); } }
+	#define CR_ASSERT(x, ...) { if(!(x)) { CR_ERROR("Assertion Failed: {0}", __VA_ARGS__); CR_DEBUGBREAK(); }}
+	#define CR_CORE_ASSERT(x, ...) { if(!(x)) { CR_CORE_ERROR("Assertion Failed: {0}", __VA_ARGS__); CR_DEBUGBREAK(); } }
 #else
 	#define CR_ASSERT(x, ...)
 	#define CR_CORE_ASSERT(x, ...)
