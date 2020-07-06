@@ -26,6 +26,8 @@ namespace Crystal
 		Ref<Texture2D> m_SpriteTexture;
 		Ref<Framebuffer> m_Framebuffer;
 
+		glm::vec2 m_ViewportSize = { 0.0f, 0.0f };
+
 		glm::vec4 m_SquareColorA = { 0.8f, 0.2f, 0.3f, 1.0f };
 		glm::vec4 m_SquareColorB = { 0.3f, 0.2f, 0.8f, 1.0f };
 	};

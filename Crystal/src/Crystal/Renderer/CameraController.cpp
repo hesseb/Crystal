@@ -57,8 +57,6 @@ namespace Crystal
 				m_CameraRotation += 360.0f;
 		}
 
-
-
 		if (Crystal::Input::IsKeyPressed(CR_KEY_R))
 		{
 			m_CameraPosition = { 0.0f, 0.0f, 0.0f };
@@ -86,6 +84,12 @@ namespace Crystal
 		dispatcher.Dispatch<WindowResizeEvent>(CR_BIND_EVENT_FN(OrthographicCameraController::OnWindowResized));
 	}
 
+	void OrthographicCameraController::OnResize(float width, float height)
+	{
+		m_AspectRatio = width / height;
+		m_Camera.SetProjection(m_AspectRatio, m_ZoomLevel);
+	}
+
 	bool OrthographicCameraController::OnMouseScrolled(MouseScrolledEvent& e)
 	{
 		CR_PROFILE_FUNCTION();
@@ -105,8 +109,7 @@ namespace Crystal
 	{
 		CR_PROFILE_FUNCTION();
 
-		m_AspectRatio = (float)e.GetWidth() / (float)e.GetHeight();
-		m_Camera.SetProjection(m_AspectRatio, m_ZoomLevel);
+		OnResize((float)e.GetWidth(), (float)e.GetHeight());
 		return false;
 	}
 }
