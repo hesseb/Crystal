@@ -15,6 +15,11 @@ void Sandbox2D::OnAttach()
 
 	m_CheckerboardTexture = Crystal::Texture2D::Create("assets/textures/Checkerboard.png");
 	m_SpriteTexture = Crystal::Texture2D::Create("assets/textures/head.png");
+
+	Crystal::FramebufferSpecification fbSpec;
+	fbSpec.Width = 1280;
+	fbSpec.Height = 720;
+	m_Framebuffer = Crystal::Framebuffer::Create(fbSpec);
 }
 
 void Sandbox2D::OnDetach()
@@ -32,6 +37,7 @@ void Sandbox2D::OnUpdate(Crystal::Timestep ts)
 	{
 		CR_PROFILE_SCOPE("Renderer Prep");
 		//Render
+		m_Framebuffer->Bind();
 		Crystal::RenderCommand::SetClearColor({ 0.1f, 0.1f, 0.1f, 1 });
 		Crystal::RenderCommand::Clear();
 	}
@@ -87,7 +93,7 @@ void Sandbox2D::OnUpdate(Crystal::Timestep ts)
 		Crystal::Renderer2D::EndScene();
 	}
 
-
+	m_Framebuffer->Unbind();
 }
 
 void Sandbox2D::OnImGuiRender()
@@ -95,7 +101,7 @@ void Sandbox2D::OnImGuiRender()
 	CR_PROFILE_FUNCTION();
 
 	// Note: Switch this to true to enable dockspace
-	static bool dockingEnabled = false;
+	static bool dockingEnabled = true;
 	if (dockingEnabled)
 	{
 		static bool dockspaceOpen = true;
@@ -170,8 +176,8 @@ void Sandbox2D::OnImGuiRender()
 		ImGui::Text("Indices: %d", stats.GetTotalIndexCount());
 		ImGui::Text("Average frametime: %.3f ms (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
 
-		uint32_t textureID = m_CheckerboardTexture->GetRendererID();
-		ImGui::Image((void*)(intptr_t)textureID, ImVec2{ 256.0f, 256.0f });
+		uint32_t textureID = m_Framebuffer->GetColorAttachmentRendererID();
+		ImGui::Image((void*)(intptr_t)textureID, ImVec2{ 1280.0f, 720.0f });
 		ImGui::End();
 
 
