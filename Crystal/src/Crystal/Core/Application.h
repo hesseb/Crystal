@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Crystal/Core/Core.h"
+#include "Crystal/Core/Base.h"
 #include "Crystal/Core/Window.h"
 #include "Crystal/Core/LayerStack.h"
 #include "Crystal/Events/Event.h"

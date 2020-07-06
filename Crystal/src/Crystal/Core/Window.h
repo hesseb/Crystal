@@ -1,7 +1,7 @@
 #pragma once
 #include <crpch.h>
 
-#include "Crystal/Core/Core.h"
+#include "Crystal/Core/Base.h"
 #include "Crystal/Events/Event.h"
 
 namespace Crystal

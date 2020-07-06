@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Crystal/Core/Core.h"
+#include "Crystal/Core/Base.h"
 #include "Crystal/Core/KeyCodes.h"
 #include "Crystal/Core/MouseCodes.h"
 
