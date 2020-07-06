@@ -1,6 +1,6 @@
 workspace "Crystal"
 	architecture "x86_64"
-	startproject "Sandbox"
+	startproject "Geode"
 
 	configurations
 	{
@@ -105,6 +105,57 @@ project "Crystal"
 		runtime "Release"
 		optimize "on"
 
+project "Geode"
+	location "Geode"
+	kind "ConsoleApp"
+	language "C++"
+	cppdialect "C++17"
+	staticruntime "on"
+
+	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
+	objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
+
+	files
+	{
+		"%{prj.name}/src/**.h",
+		"%{prj.name}/src/**.cpp"
+	}
+
+	includedirs
+	{
+		"Crystal/src/",
+		"Crystal/vendor",
+		"Crystal/vendor/spdlog/include/",
+		"%{IncludeDir.glm}"
+	}
+
+	links
+	{
+		"Crystal"
+	}
+
+	filter "system:windows"
+		systemversion "latest"
+
+		defines
+		{
+			"CR_PLATFORM_WINDOWS"
+		}
+
+	filter "configurations:Debug"
+		defines "CR_DEBUG"
+		runtime "Debug"
+		symbols "on"
+
+	filter "configurations:Release"
+		defines "CR_RELEASE"
+		runtime "Release"
+		optimize "on"
+
+	filter "configurations:Dist"
+		defines "CR_DIST"
+		runtime "Release"
+		optimize "on"
 
 project "Sandbox"
 	location "Sandbox"
