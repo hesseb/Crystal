@@ -20,6 +20,8 @@ namespace Crystal
 		void Run();
 		void Close();
 
+		Ref<ImGuiLayer> GetImGuiLayer() { return m_ImGuiLayer; }
+
 		void OnEvent(Event& e);
 
 		void PushLayer(Ref<Layer> layer);
