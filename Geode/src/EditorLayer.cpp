@@ -52,9 +52,9 @@ namespace Crystal
 			CR_PROFILE_SCOPE("Renderer Draw");
 
 			Renderer2D::BeginScene(m_CameraController.GetCamera());
-			Renderer2D::DrawRotatedQuad({ 1.0f, 0.0f }, { 0.8f, 0.8f }, -45.0f, { 0.8f, 0.2f, 0.3f, 1.0f });
-			Renderer2D::DrawQuad({ -1.0f, 0.0f }, { 0.8f, 0.8f }, { 0.8f, 0.2f, 0.3f, 1.0f });
-			Renderer2D::DrawQuad({ 0.5f, -0.5f }, { 0.5f, 0.75f }, { 0.2f, 0.3f, 0.8f, 1.0f });
+			Renderer2D::DrawRotatedQuad({ 1.0f, 0.0f }, { 0.8f, 0.8f }, -45.0f, m_QuadColorA);
+			Renderer2D::DrawQuad({ -1.0f, 0.0f }, { 0.8f, 0.8f }, m_QuadColorA);
+			Renderer2D::DrawQuad({ 0.5f, -0.5f }, { 0.5f, 0.75f }, m_QuadColorB);
 			Renderer2D::DrawQuad({ 0.0f, 0.0f, -0.1f }, { 10.0f, 10.0f }, m_CheckerboardTexture, 10.0f);
 			Renderer2D::DrawQuad({ 0.0f, 0.0f, -0.1f }, { 20.0f, 20.0f }, m_CheckerboardTexture, 10.0f);
 			Renderer2D::EndScene();
@@ -141,8 +141,8 @@ namespace Crystal
 		{
 			ImGui::Begin("Settings");
 
-			ImGui::ColorEdit4("Square A Color", glm::value_ptr(m_SquareColorA));
-			ImGui::ColorEdit4("Square B Color", glm::value_ptr(m_SquareColorB));
+			ImGui::ColorEdit4("Square A Color", glm::value_ptr(m_QuadColorA));
+			ImGui::ColorEdit4("Square B Color", glm::value_ptr(m_QuadColorB));
 			auto stats = Crystal::Renderer2D::GetStats();
 			ImGui::Text("Renderer2D Stats:");
 			ImGui::Text("Draw Calls: %d", stats.DrawCalls);

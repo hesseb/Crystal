@@ -28,7 +28,7 @@ namespace Crystal
 
 		glm::vec2 m_ViewportSize = { 0.0f, 0.0f };
 
-		glm::vec4 m_SquareColorA = { 0.8f, 0.2f, 0.3f, 1.0f };
-		glm::vec4 m_SquareColorB = { 0.3f, 0.2f, 0.8f, 1.0f };
+		glm::vec4 m_QuadColorA = { 0.8f, 0.2f, 0.3f, 1.0f };
+		glm::vec4 m_QuadColorB = { 0.3f, 0.2f, 0.8f, 1.0f };
 	};
 }
